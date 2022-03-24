@@ -1,0 +1,13 @@
+- create collection provider component
+- colleciton props
+- reducer state
+- main reducers
+- action
+- withCollection
+- hooks
+- defaults
+- theme
+- services
+- service factory
+- factories
+
