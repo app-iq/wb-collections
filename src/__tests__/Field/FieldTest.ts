@@ -29,4 +29,14 @@ describe('Field', () => {
         const value = transformFieldValue('test', field, {});
         expect(value).toEqual('test');
     });
+
+    it('should return same value when transforming using empty array', () => {
+        const field: Field = {
+            name: 'test',
+            title: 'Test',
+            transform: [],
+        };
+        const value = transformFieldValue('test', field, {});
+        expect(value).toEqual('test');
+    });
 });
