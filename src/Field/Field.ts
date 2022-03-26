@@ -8,6 +8,7 @@ export interface Field {
     renderTitle?: (value: any, field: Field) => ReactElement | null;
     renderValue?: (value: any, field: Field, record: unknown, index?: number) => ReactElement | null;
     transform?: TransformFunc | TransformFunc[];
+    order: number;
 }
 
 export function transformFieldValue(value: any, field: Field, record: unknown): any {
