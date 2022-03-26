@@ -34,6 +34,7 @@ export class HttpFetchService extends FetchServiceBase {
 }
 
 export interface HttpFetchOptions {
+    data: never;
     fetch?: () => Promise<unknown[]>;
     url: string;
     method?: string;
