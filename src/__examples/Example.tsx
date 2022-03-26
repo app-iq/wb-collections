@@ -1,3 +1,4 @@
+import React from "react";
 import { CollectionProvider } from '../Collection/CollectionProvider';
 
 export function Example() {

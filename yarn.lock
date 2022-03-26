@@ -8348,10 +8348,10 @@ watchpack@^2.3.1:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
 
-wbox-context@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/wbox-context/-/wbox-context-0.3.0.tgz#b37b31f24d01a6b2f734b229a12a105dd49679df"
-  integrity sha512-YuX+lvtq8earElod/6kuffUxI7BqstB+l7pTkQ6xshD7eEGKkGxhcMdl2cvJV/0tgRfn6oO0fCDFU+qSTybQag==
+wbox-context@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/wbox-context/-/wbox-context-0.3.2.tgz#9a6b2460e1b3bae7d80df75a391284f0dc453407"
+  integrity sha512-E5fpXaXHMxBqY8eW7JVHZeCBOUR/qu57QAB1CYF66dAiru+ZGfMnrJUt9T/5eHRWKwl/lkWH00umrtCVjUfFsg==
 
 wbuf@^1.1.0, wbuf@^1.7.3:
   version "1.7.3"
