@@ -1,11 +1,23 @@
-- reducer state
-- main reducers
-- action
 - withCollection
 - hooks
 - defaults
-- theme
 - services
-- service factory
 - factories
 
+
+
+
+------------------
+
+
+
+data actions (insert(3 types) , remove (3 types) , update)
+CollectionComponentWrapper (handle loading , empty , error && positions)
+Defaults Provider
+Test Components (table,list)
+
+
+
+Plugins:
+- tailwindcss with factories
+- 
