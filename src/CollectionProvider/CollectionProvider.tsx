@@ -1,7 +1,16 @@
-import React, { useEffect } from 'react';
-import { Action, CoreProvider, DispatchFunction, Reducer, useDispatch, useServiceFactory, useState } from 'wbox-context';
+import React, { ReactElement, useEffect } from 'react';
+import {
+    Action,
+    CoreProvider,
+    DispatchFunction,
+    Reducer,
+    useDispatch,
+    useServiceFactory,
+    useState,
+} from 'wbox-context';
 import { FetchReducer as fetchReducer } from '../Data/Fetch/FetchReducer';
 import { INITIAL_STATE, State } from '../Data/State';
+import { RenderOptions } from '../Data/Types/OptionsState';
 import { FetchService } from '../Service/Fetch/FetchService';
 import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
 import { DirectFetchOptions } from '../Service/Fetch/OptionBasedFetchService';
@@ -9,14 +18,13 @@ import { DefaultServiceFactory, ServiceFactory } from '../Service/ServiceFactory
 
 export interface CollectionProviderProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    reducers?: Reducer<State , Action<any,any>>[];
+    reducers?: Reducer<State, Action<any, any>>[];
     serviceFactory?: (dispatch: DispatchFunction, state: State) => ServiceFactory;
     data: DirectFetchOptions | HttpFetchOptions;
+    render?: RenderOptions;
 }
 
-const baseReducers = [
-    fetchReducer
-];
+const baseReducers = [fetchReducer];
 
 export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
     const fetcherType: FetcherType = props.data !== undefined ? 'direct' : 'http';

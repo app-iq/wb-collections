@@ -1,5 +1,5 @@
 import React from "react";
-import { CollectionProvider } from '../Collection/CollectionProvider';
+import { CollectionProvider } from '../CollectionProvider/CollectionProvider';
 
 export function Example() {
     return (

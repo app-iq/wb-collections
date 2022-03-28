@@ -1,9 +1,13 @@
 import { Field } from './../Field/Field';
+import { RenderOptions } from './Types/OptionsState';
 export interface State {
     fields: { [fieldName: string]: Field };
     loading: boolean;
     error: unknown;
     data: unknown[];
+    options: {
+        render: RenderOptions;
+    };
 }
 
 export const INITIAL_STATE: State = {
@@ -11,4 +15,7 @@ export const INITIAL_STATE: State = {
     data: [],
     loading: false,
     error: undefined,
+    options: {
+        render: {},
+    },
 };
