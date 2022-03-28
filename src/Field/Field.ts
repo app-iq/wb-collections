@@ -20,3 +20,7 @@ export function transformFieldValue(value: any, field: Field, record: unknown): 
     }
     return field.transform(value, field, record);
 }
+
+export function getFieldValue(field: Field, record: unknown): any {
+    return transformFieldValue((record as any)[field.name], field, record);
+}

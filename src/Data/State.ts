@@ -1,7 +1,7 @@
 import { Field } from './../Field/Field';
 import { RenderOptions } from './Types/OptionsState';
 export interface State {
-    fields: { [fieldName: string]: Field };
+    fields: Field[];
     loading: boolean;
     error: unknown;
     data: unknown[];
@@ -11,7 +11,7 @@ export interface State {
 }
 
 export const INITIAL_STATE: State = {
-    fields: {},
+    fields: [],
     data: [],
     loading: false,
     error: undefined,
