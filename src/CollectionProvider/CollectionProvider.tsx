@@ -16,14 +16,14 @@ import { RenderOptions } from '../Data/Types/OptionsState';
 import { Field } from '../Field/Field';
 import { FetchService } from '../Service/Fetch/FetchService';
 import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
-import { DirectFetchOptions } from '../Service/Fetch/OptionBasedFetchService';
+import { SimpleFetchOptions } from '../Service/Fetch/OptionBasedFetchService';
 import { DefaultServiceFactory, ServiceFactory } from '../Service/ServiceFactory';
 
 export interface CollectionProviderProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     reducers?: Reducer<State, Action<any, any>>[];
     serviceFactory?: (dispatch: DispatchFunction, state: State) => ServiceFactory;
-    dataOptions: DirectFetchOptions | HttpFetchOptions;
+    dataOptions: SimpleFetchOptions | HttpFetchOptions;
     renderOptions?: RenderOptions;
     fields: Field[];
 }
@@ -51,7 +51,7 @@ export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
 type FetcherType = 'http' | 'direct';
 interface CollectionWrapperProps {
     fetcherType: FetcherType;
-    fetchOptions: DirectFetchOptions | HttpFetchOptions;
+    fetchOptions: SimpleFetchOptions | HttpFetchOptions;
     fields: Field[];
 }
 

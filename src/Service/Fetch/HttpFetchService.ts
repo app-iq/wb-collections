@@ -1,17 +1,18 @@
+import { CollectionsDefaults } from './../../Defaults/DefaultsContext';
 import { DispatchFunction } from 'wbox-context';
 import { FetchServiceBase, DataResult } from './FetchServiceBase';
 
-// TODO : HANDLE DEFAUTLS
 export class HttpFetchService extends FetchServiceBase {
     private readonly options: HttpFetchOptions;
+    private readonly defaults: CollectionsDefaults;
 
-    constructor(dispatch: DispatchFunction, options: HttpFetchOptions) {
+    constructor(dispatch: DispatchFunction, options: HttpFetchOptions, defaults: CollectionsDefaults) {
         super(dispatch);
         this.options = options;
+        this.defaults = defaults;
     }
 
     protected fetchData(): Promise<DataResult> {
-        console.log('http fetch');
         const customFetch = this.options.fetch;
         if (customFetch) {
             return customFetch();
@@ -21,30 +22,29 @@ export class HttpFetchService extends FetchServiceBase {
 
     private async sendRequest() {
         const url = this.options.url;
-        const parseResponse = this.options.parseResponse ?? ((res:Response) => res.json());
-        const buildData = this.options.buildData ?? ((res : any) => ({totalCount: res.length , items: res}))
-        return fetch(url, {
-            // TODO : put defaults options here
-            method: this.options.method ?? 'GET',
+        const parseResponse = this.options.parseResponse ?? this.defaults.httpFetcher.parseResponse;
+        const buildData = this.options.buildDataResult ?? this.defaults.httpFetcher.buildDataResult;
+        const options = {
+            method: this.options.method ?? this.defaults.httpFetcher.method,
             body: this.options.body,
-            headers: this.options.headers ?? {
-                'Content-Type': 'application/json',
-            },
+            headers: this.options.headers ?? this.defaults.httpFetcher.headers,
+            ...this.defaults.httpFetcher.requestOptions,
             ...(this.options.fetchOptions ?? {}),
-        })
-        .then(data => parseResponse(data))
-        .then(res => buildData(res));
+        };
+        return fetch(url, options)
+            .then(data => parseResponse(data))
+            .then(res => buildData(res));
     }
 }
 
 export interface HttpFetchOptions {
-    data?: never;
-    fetch?: () => Promise<DataResult>;
     url: string;
     method?: string;
     body?: BodyInit;
     headers?: HeadersInit;
     fetchOptions?: RequestInit;
-    parseResponse?: (response: Response) => unknown;
-    buildData?: (parsedResponse: unknown) => DataResult;
+    parseResponse?: (response: Response) => Promise<unknown>;
+    buildDataResult?: (parsedResponse: unknown) => DataResult;
+    fetch?: () => Promise<DataResult>;
+    data?: never;
 }

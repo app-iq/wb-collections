@@ -7,7 +7,7 @@ import { Table } from './TableCollection';
 export function Example() {
     const dataOptions: HttpFetchOptions = {
         url: 'http://localhost:8080/collection',
-        buildData: (res: any) => ({ items: res.data, totalCount: res.data.length }),
+        buildDataResult: (res: any) => ({ items: res.data, totalCount: res.data.length }),
     };
     const fields: Field[] = [
         { name: 'id', title: '#' },

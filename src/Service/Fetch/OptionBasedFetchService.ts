@@ -2,9 +2,9 @@ import { DispatchFunction } from 'wbox-context';
 import { DataResult, FetchServiceBase } from './FetchServiceBase';
 
 export class OptionBasedFetchService extends FetchServiceBase {
-    private readonly options: DirectFetchOptions;
+    private readonly options: SimpleFetchOptions;
 
-    public constructor(dispatch: DispatchFunction, options: DirectFetchOptions) {
+    public constructor(dispatch: DispatchFunction, options: SimpleFetchOptions) {
         super(dispatch);
         this.options = options;
     }
@@ -19,6 +19,6 @@ export class OptionBasedFetchService extends FetchServiceBase {
     }
 }
 
-export interface DirectFetchOptions {
+export interface SimpleFetchOptions {
     data: unknown[];
 }

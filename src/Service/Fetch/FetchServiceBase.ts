@@ -1,6 +1,7 @@
 import { FetchActions } from './../../Data/Fetch/FetchAction';
 import { DispatchFunction } from 'wbox-context/dist/Context/DispatchContext';
 import { FetchService } from './FetchService';
+
 export abstract class FetchServiceBase implements FetchService {
     private readonly dispatch: DispatchFunction;
     private shouldCancel = false;
