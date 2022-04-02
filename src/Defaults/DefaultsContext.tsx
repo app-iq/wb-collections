@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { Elements } from '../Data/Types/OptionsState';
 import { DataResult } from './../Service/Fetch/FetchServiceBase';
 
+const defaultOrderElements = (elements: Elements) => {
+    return [elements.loading, elements.error, elements.empty, elements.collection];
+};
 export interface CollectionsDefaults {
     httpFetcher: {
         method: string;
@@ -8,6 +12,13 @@ export interface CollectionsDefaults {
         buildDataResult: (parsedResponse: unknown) => DataResult;
         headers: HeadersInit;
         requestOptions: Partial<RequestInit>;
+    };
+    renderOptions: {
+        renderLoading: () => ReactElement | null;
+        renderError: () => ReactElement | null;
+        renderEmpty: () => ReactElement | null;
+        displayCollectionOnEmpty: boolean;
+        orderElements: (elements: Elements) => ((() => ReactElement | null) | null)[];
     };
 }
 
@@ -24,6 +35,15 @@ const defaults: CollectionsDefaults = {
         },
         requestOptions: {},
     },
+    renderOptions: {
+        renderEmpty: () => <h1>Empty</h1>,
+        renderLoading: () => <h1>Loading</h1>,
+        renderError: () => <h1>Error</h1>,
+        displayCollectionOnEmpty: false,
+        orderElements: defaultOrderElements
+    },
 };
+
+
 
 export const DefaultsContext = React.createContext<CollectionsDefaults>(defaults);

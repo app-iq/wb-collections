@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { InfiniteScroll } from '../Collection/InfiniteScroll';
 import { CollectionProvider } from '../CollectionProvider/CollectionProvider';
 import { Field } from '../Field/Field';
 import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
@@ -22,7 +23,11 @@ export function Example() {
 
     return (
         <CollectionProvider fetchOptions={dataOptions} fields={fields}>
-            <Table />
+            <div>
+                <InfiniteScroll>
+                    <Table />
+                </InfiniteScroll>
+            </div>
         </CollectionProvider>
     );
 }

@@ -1,7 +1,9 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 import { useState } from 'wbox-context';
 import { State } from '../Data/State';
 import { Elements } from '../Data/Types/OptionsState';
+import { CollectionsDefaults } from '../Defaults/DefaultsContext';
+import { useCollectionDefaults } from '../Defaults/Hooks';
 
 export interface WithCollectionProps {
     data: unknown[];
@@ -10,29 +12,18 @@ export interface WithCollectionProps {
 export const withCollection = (Component: React.ComponentType<WithCollectionProps>) => {
     return function WithCollection(props: object) {
         const state: State = useState();
+        const defaults = useCollectionDefaults();
         const isEmpty = state.data.length === 0 && !state.loading && !state.error;
-        const displayCollectionOnEmpty = state.options.render.displayCollectionOnEmpty ?? false;
-        let collection: any = () => <Component {...props} data={state.data} />;
-        if (state.loading || state.error) {
-            collection = null;
-        } else if (isEmpty && !displayCollectionOnEmpty) {
+        const displayCollectionOnEmpty =
+            state.options.render.displayCollectionOnEmpty ?? defaults.renderOptions.displayCollectionOnEmpty;
+        let collection: (() => ReactElement | null) | null = () => <Component {...props} data={state.data} />;
+        if (state.loading || state.error || (isEmpty && !displayCollectionOnEmpty)) {
             collection = null;
         }
 
-        const elements: Elements = {
-            loading: getComponentFromOptionsOrDefaultOptions(state.loading, state.options.render.renderLoading, () => (
-                <h1>Loading</h1>
-            )),
-            error: getComponentFromOptionsOrDefaultOptions(!!state.error, state.options.render.renderError, () => (
-                <h1>Error</h1>
-            )),
-            empty: getComponentFromOptionsOrDefaultOptions(isEmpty, state.options.render.renderEmpty, () => (
-                <h1>Empty</h1>
-            )),
-            collection: collection,
-        };
-        // TODO : use defaults
-        const orderElements = state.options.render.orderElements ?? defaultOrderElements;
+        const elements = buildElements(state, defaults, isEmpty, collection);
+
+        const orderElements = state.options.render.orderElements ?? defaults.renderOptions.orderElements;
         return (
             <React.Fragment>
                 {orderElements(elements).map((element, index) => {
@@ -47,14 +38,36 @@ export const withCollection = (Component: React.ComponentType<WithCollectionProp
     };
 };
 
-const defaultOrderElements = (elements: Elements) => {
-    return [elements.loading, elements.error, elements.empty, elements.collection];
-};
+function buildElements(
+    state: State,
+    defaults: CollectionsDefaults,
+    isEmpty: boolean,
+    collection: (() => ReactElement | null) | null,
+): Elements {
+    return {
+        loading: getComponentFromOptionsOrDefaultOptions(
+            state.loading,
+            state.options.render.renderLoading,
+            defaults.renderOptions.renderLoading,
+        ),
+        error: getComponentFromOptionsOrDefaultOptions(
+            !!state.error,
+            state.options.render.renderError,
+            defaults.renderOptions.renderError,
+        ),
+        empty: getComponentFromOptionsOrDefaultOptions(
+            isEmpty,
+            state.options.render.renderEmpty,
+            defaults.renderOptions.renderEmpty,
+        ),
+        collection: collection,
+    };
+}
 
 const getComponentFromOptionsOrDefaultOptions = (
     shouldDisplay: boolean,
-    renderFromOptions: any,
-    renderFromDefaults: any,
+    renderFromOptions?: (() => ReactElement | null) | null,
+    renderFromDefaults?: (() => ReactElement | null) | null,
 ) => {
     if (shouldDisplay) {
         return renderFromOptions ?? renderFromDefaults ?? null;

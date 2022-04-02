@@ -11,11 +11,8 @@
 
 X - data actions (insert(3 types) , remove (3 types) , update)
 [put filters when sending http request]
-CollectionComponentWrapper (handle loading , empty , error && positions)
-Defaults Provider
 Test Components (table,list)
-paging
-infinity loading
+paging && infinity loading
 
 
 

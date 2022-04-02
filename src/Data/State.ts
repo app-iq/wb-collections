@@ -1,9 +1,9 @@
 import { HttpFetchOptions } from './../Service/Fetch/HttpFetchService';
 import { Field } from './../Field/Field';
 import { RenderOptions } from './Types/OptionsState';
-import { SimpleFetchOptions } from '../Service/Fetch/OptionBasedFetchService';
+import { BasicFetchOptions } from '../Service/Fetch/OptionBasedFetchService';
 
-export type FetchOptions = HttpFetchOptions | SimpleFetchOptions;
+export type FetchOptions = HttpFetchOptions | BasicFetchOptions;
 
 export interface State {
     fields: Field[];
