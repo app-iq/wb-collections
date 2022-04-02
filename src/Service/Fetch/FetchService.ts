@@ -1,3 +1,3 @@
 export interface FetchService {
-    fetch(): Promise<unknown[]>;
+    fetch(): Promise<void>;
 }

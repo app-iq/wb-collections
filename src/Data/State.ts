@@ -16,6 +16,13 @@ export interface State {
     };
 }
 
+export function buildInitialState(override: Partial<State> = {}): State {
+    return {
+        ...INITIAL_STATE,
+        ...override
+    }
+}
+
 export const INITIAL_STATE: State = {
     fields: [],
     data: [],

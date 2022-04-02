@@ -10,14 +10,14 @@ export enum OptionsActionType {
 export type OptionsAction<TPayload> = Action<OptionsActionType, TPayload>;
 
 export class OptionsActions {
-    public setRenderOptions(options: RenderOptions): OptionsAction<RenderOptions> {
+    public static setRenderOptions(options: RenderOptions): OptionsAction<RenderOptions> {
         return {
             type: OptionsActionType.SET_RENDER_OPTIONS,
             payload: options,
         };
     }
 
-    public setFetchOptions(options: FetchOptions): OptionsAction<FetchOptions> {
+    public static setFetchOptions(options: FetchOptions): OptionsAction<FetchOptions> {
         return {
             type: OptionsActionType.SET_FETCH_OPTIONS,
             payload: options,

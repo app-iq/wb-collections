@@ -27,9 +27,5 @@ Plugins:
 
 WORK ITEMS:
 
-- setup table example
-- use http fetch service to fetch data
-- fixes & improvements
-- default provider
 - code cleanup
 - tests

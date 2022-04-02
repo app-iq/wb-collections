@@ -10,25 +10,22 @@ export abstract class FetchServiceBase implements FetchService {
         this.dispatch = dispatch;
     }
 
-    async fetch(): Promise<unknown[]> {
+    async fetch(): Promise<void> {
         this.shouldCancel = false;
         this.handleStart();
         try {
             const data = await this.fetchData();
             if (this.shouldCancel) {
                 this.handleCancel();
-                return [];
+                return;
             }
-            console.log(data);
             this.handleDone(data.items);
-            return data.items;
         } catch (e) {
             if (!this.shouldCancel) {
                 this.handleError(e);
             } else {
                 this.handleCancel();
             }
-            throw e;
         }
     }
 

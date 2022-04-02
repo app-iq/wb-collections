@@ -13,6 +13,7 @@ export class HttpFetchService extends FetchServiceBase {
     }
 
     protected fetchData(): Promise<DataResult> {
+        console.log(this);
         const customFetch = this.options.fetch;
         if (customFetch) {
             return customFetch();
