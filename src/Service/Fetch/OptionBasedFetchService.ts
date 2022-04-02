@@ -1,5 +1,5 @@
 import { DispatchFunction } from 'wbox-context';
-import { FetchServiceBase } from './FetchServiceBase';
+import { DataResult, FetchServiceBase } from './FetchServiceBase';
 
 export class OptionBasedFetchService extends FetchServiceBase {
     private readonly options: DirectFetchOptions;
@@ -9,9 +9,12 @@ export class OptionBasedFetchService extends FetchServiceBase {
         this.options = options;
     }
 
-    protected fetchData(): Promise<unknown[]> {
-        return new Promise<unknown[]>(resolve => {
-            resolve(this.options.data);
+    protected fetchData(): Promise<DataResult> {
+        return new Promise<DataResult>(resolve => {
+            resolve({
+                items: this.options.data,
+                totalCount: this.options.data.length
+            });
         });
     }
 }

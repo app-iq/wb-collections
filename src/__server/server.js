@@ -14,11 +14,19 @@ const data = [
 ]
 
 app.get('/collection', function (req, res, next) {
-    res.json({
-        data: data,
-        totalCount: data.length
-    });
+    setTimeout(() => {
+        if(req.query.error){
+            res.status(400);
+            res.send();
+            return;
+        }
+        res.json({
+            data: data,
+            totalCount: data.length
+        });
+    } , 2000);
 });
 
 app.listen(8080, function () {
     console.log('starting wbox-forms test server');
+});

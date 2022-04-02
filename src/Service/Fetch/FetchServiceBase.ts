@@ -14,11 +14,13 @@ export abstract class FetchServiceBase implements FetchService {
         this.handleStart();
         try {
             const data = await this.fetchData();
-            if (!this.shouldCancel) {
+            if (this.shouldCancel) {
                 this.handleCancel();
+                return [];
             }
-            this.handleDone(data);
-            return data;
+            console.log(data);
+            this.handleDone(data.items);
+            return data.items;
         } catch (e) {
             if (!this.shouldCancel) {
                 this.handleError(e);
@@ -33,7 +35,7 @@ export abstract class FetchServiceBase implements FetchService {
         this.shouldCancel = true;
     }
 
-    protected abstract fetchData(): Promise<unknown[]>;
+    protected abstract fetchData(): Promise<DataResult>;
 
     protected handleStart(): void {
         this.dispatch(FetchActions.start());
@@ -50,4 +52,10 @@ export abstract class FetchServiceBase implements FetchService {
     protected handleCancel(): void {
         // TODO : handle cancel
     }
+}
+
+
+export interface DataResult {
+    totalCount: number;
+    items: unknown[];
 }

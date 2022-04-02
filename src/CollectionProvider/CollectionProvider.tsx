@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
     Action,
     CoreProvider,
@@ -9,8 +9,11 @@ import {
     useState,
 } from 'wbox-context';
 import { FetchReducer as fetchReducer } from '../Data/Fetch/FetchReducer';
+import { FieldsActions } from '../Data/Fields/FieldsActions';
+import { fieldsReducer } from '../Data/Fields/FieldsReducer';
 import { INITIAL_STATE, State } from '../Data/State';
 import { RenderOptions } from '../Data/Types/OptionsState';
+import { Field } from '../Field/Field';
 import { FetchService } from '../Service/Fetch/FetchService';
 import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
 import { DirectFetchOptions } from '../Service/Fetch/OptionBasedFetchService';
@@ -20,14 +23,15 @@ export interface CollectionProviderProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     reducers?: Reducer<State, Action<any, any>>[];
     serviceFactory?: (dispatch: DispatchFunction, state: State) => ServiceFactory;
-    data: DirectFetchOptions | HttpFetchOptions;
-    render?: RenderOptions;
+    dataOptions: DirectFetchOptions | HttpFetchOptions;
+    renderOptions?: RenderOptions;
+    fields: Field[];
 }
 
-const baseReducers = [fetchReducer];
+const baseReducers = [fieldsReducer, fetchReducer];
 
 export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
-    const fetcherType: FetcherType = props.data !== undefined ? 'direct' : 'http';
+    const fetcherType: FetcherType = props.dataOptions.data !== undefined ? 'direct' : 'http';
     const reducers = baseReducers.concat(props.reducers ?? []);
     return (
         <CoreProvider
@@ -37,7 +41,9 @@ export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
             }
             initialState={INITIAL_STATE}
         >
-            <CollectionWrapper fetcherType={fetcherType}>{props.children}</CollectionWrapper>
+            <CollectionWrapper fetcherType={fetcherType} fields={props.fields} fetchOptions={props.dataOptions}>
+                {props.children}
+            </CollectionWrapper>
         </CoreProvider>
     );
 };
@@ -45,6 +51,8 @@ export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
 type FetcherType = 'http' | 'direct';
 interface CollectionWrapperProps {
     fetcherType: FetcherType;
+    fetchOptions: DirectFetchOptions | HttpFetchOptions;
+    fields: Field[];
 }
 
 export const CollectionWrapper: React.FC<CollectionWrapperProps> = props => {
@@ -53,9 +61,13 @@ export const CollectionWrapper: React.FC<CollectionWrapperProps> = props => {
     const sf: ServiceFactory = useServiceFactory();
 
     useEffect(() => {
+        dispatch(FieldsActions.set(props.fields));
+    }, [dispatch, props.fields]);
+
+    useEffect(() => {
         const service: FetchService =
             props.fetcherType === 'http'
-                ? sf.createOptionBasedFetchService(state, dispatch)
+                ? sf.createHttpFetchService(state, dispatch, props.fetchOptions as HttpFetchOptions)
                 : sf.createOptionBasedFetchService(state, dispatch);
         service.fetch();
     }, []);

@@ -5,8 +5,6 @@
 - factories
 
 
-
-
 ------------------
 
 
@@ -16,9 +14,22 @@ X - data actions (insert(3 types) , remove (3 types) , update)
 CollectionComponentWrapper (handle loading , empty , error && positions)
 Defaults Provider
 Test Components (table,list)
+paging
+infinity loading
 
 
 
 Plugins:
 - tailwindcss with factories & theme
-- 
+-
+
+
+
+WORK ITEMS:
+
+- setup table example
+- use http fetch service to fetch data
+- fixes & improvements
+- default provider
+- code cleanup
+- tests

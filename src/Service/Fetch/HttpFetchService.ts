@@ -1,5 +1,5 @@
 import { DispatchFunction } from 'wbox-context';
-import { FetchServiceBase } from './FetchServiceBase';
+import { FetchServiceBase, DataResult } from './FetchServiceBase';
 
 // TODO : HANDLE DEFAUTLS
 export class HttpFetchService extends FetchServiceBase {
@@ -10,7 +10,8 @@ export class HttpFetchService extends FetchServiceBase {
         this.options = options;
     }
 
-    protected fetchData(): Promise<unknown[]> {
+    protected fetchData(): Promise<DataResult> {
+        console.log('http fetch');
         const customFetch = this.options.fetch;
         if (customFetch) {
             return customFetch();
@@ -20,7 +21,8 @@ export class HttpFetchService extends FetchServiceBase {
 
     private async sendRequest() {
         const url = this.options.url;
-        const extractData = this.options.extractDataFromResponse ?? ((res:Response) => res.json());
+        const parseResponse = this.options.parseResponse ?? ((res:Response) => res.json());
+        const buildData = this.options.buildData ?? ((res : any) => ({totalCount: res.length , items: res}))
         return fetch(url, {
             // TODO : put defaults options here
             method: this.options.method ?? 'GET',
@@ -29,17 +31,20 @@ export class HttpFetchService extends FetchServiceBase {
                 'Content-Type': 'application/json',
             },
             ...(this.options.fetchOptions ?? {}),
-        }).then(data => extractData(data));
+        })
+        .then(data => parseResponse(data))
+        .then(res => buildData(res));
     }
 }
 
 export interface HttpFetchOptions {
     data?: never;
-    fetch?: () => Promise<unknown[]>;
+    fetch?: () => Promise<DataResult>;
     url: string;
     method?: string;
     body?: BodyInit;
     headers?: HeadersInit;
     fetchOptions?: RequestInit;
-    extractDataFromResponse?: (response: Response) => unknown[];
+    parseResponse?: (response: Response) => unknown;
+    buildData?: (parsedResponse: unknown) => DataResult;
 }

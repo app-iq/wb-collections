@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useState } from 'wbox-context';
 import { State } from '../Data/State';
 import { Elements } from '../Data/Types/OptionsState';
@@ -10,7 +10,6 @@ export interface WithCollectionProps {
 export const withCollection = (Component: React.ComponentType<WithCollectionProps>) => {
     return function WithCollection(props: object) {
         const state: State = useState();
-
         const isEmpty = state.data.length === 0 && !state.loading && !state.error;
         const displayCollectionOnEmpty = state.options.render.displayCollectionOnEmpty ?? false;
         let collection: any = () => <Component {...props} data={state.data} />;
