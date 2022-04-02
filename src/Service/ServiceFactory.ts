@@ -1,5 +1,5 @@
 import { CollectionsDefaults } from './../Defaults/DefaultsContext';
-import { BasicFetchService, BasicFetchOptions } from './Fetch/OptionBasedFetchService';
+import { BasicFetchService, BasicFetchOptions } from './Fetch/BasicFetchService';
 import { HttpFetchService, HttpFetchOptions } from './Fetch/HttpFetchService';
 import { DispatchFunction } from 'wbox-context/dist/Context/DispatchContext';
 import { State } from './../Data/State';
@@ -25,6 +25,6 @@ export class DefaultServiceFactory implements ServiceFactory {
     }
 
     createHttpFetchService(): FetchService {
-        return new HttpFetchService(this.dispatch, this.state.options.fetch as HttpFetchOptions, this.defaults);
+        return new HttpFetchService(this.dispatch, this.state, this.state.options.fetch as HttpFetchOptions, this.defaults);
     }
 }

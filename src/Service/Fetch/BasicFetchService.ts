@@ -13,9 +13,13 @@ export class BasicFetchService extends FetchServiceBase {
         return new Promise<DataResult>(resolve => {
             resolve({
                 items: this.options.data,
-                totalCount: this.options.data.length
+                totalCount: this.options.data.length,
             });
         });
+    }
+
+    protected fetchMoreData(): Promise<DataResult> {
+        throw Error("BasicFetchService dosen't support fetch more");
     }
 }
 

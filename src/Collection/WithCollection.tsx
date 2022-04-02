@@ -13,10 +13,10 @@ export const withCollection = (Component: React.ComponentType<WithCollectionProp
     return function WithCollection(props: object) {
         const state: State = useState();
         const defaults = useCollectionDefaults();
-        const isEmpty = state.data.length === 0 && !state.loading && !state.error;
+        const isEmpty = state.items.length === 0 && !state.loading && !state.error;
         const displayCollectionOnEmpty =
             state.options.render.displayCollectionOnEmpty ?? defaults.renderOptions.displayCollectionOnEmpty;
-        let collection: (() => ReactElement | null) | null = () => <Component {...props} data={state.data} />;
+        let collection: (() => ReactElement | null) | null = () => <Component {...props} data={state.items} />;
         if (state.loading || state.error || (isEmpty && !displayCollectionOnEmpty)) {
             collection = null;
         }

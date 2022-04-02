@@ -12,20 +12,39 @@ export abstract class FetchServiceBase implements FetchService {
 
     async fetch(): Promise<void> {
         this.shouldCancel = false;
-        this.handleStart();
+        this.dispatch(FetchActions.start());
         try {
             const data = await this.fetchData();
             if (this.shouldCancel) {
-                this.handleCancel();
                 return;
             }
-            this.handleDone(data.items);
+            this.dispatch(FetchActions.done(data.items));
+            this.dispatch(FetchActions.setTotalCount(data.totalCount));
         } catch (e) {
-            if (!this.shouldCancel) {
-                this.handleError(e);
-            } else {
-                this.handleCancel();
+            if (this.shouldCancel) {
+                return;
             }
+            this.dispatch(FetchActions.fail(e));
+        }
+    }
+
+    async fetchMore(): Promise<void> {
+        this.shouldCancel = false;
+        this.dispatch(FetchActions.loading(true));
+        try {
+            const data = await this.fetchMoreData();
+            if (this.shouldCancel) {
+                return;
+            }
+            this.dispatch(FetchActions.appendItems(data.items));
+            this.dispatch(FetchActions.setTotalCount(data.totalCount));
+        } catch (e) {
+            if (this.shouldCancel) {
+                return;
+            }
+            this.dispatch(FetchActions.error(e));
+        } finally {
+            this.dispatch(FetchActions.loading(true));
         }
     }
 
@@ -34,24 +53,8 @@ export abstract class FetchServiceBase implements FetchService {
     }
 
     protected abstract fetchData(): Promise<DataResult>;
-
-    protected handleStart(): void {
-        this.dispatch(FetchActions.start());
-    }
-
-    protected handleDone(data: unknown[]): void {
-        this.dispatch(FetchActions.done(data));
-    }
-
-    protected handleError(error: unknown): void {
-        this.dispatch(FetchActions.fail(error));
-    }
-
-    protected handleCancel(): void {
-        // TODO : handle cancel
-    }
+    protected abstract fetchMoreData(): Promise<DataResult>;
 }
-
 
 export interface DataResult {
     totalCount: number;

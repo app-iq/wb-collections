@@ -7,7 +7,7 @@ import { getFieldValue } from '../Field/Field';
 const _Table = () => {
     const state: State = useState();
     const fields = state.fields;
-    const data = state.data;
+    const data = state.items;
     return (
         <table>
             <thead>

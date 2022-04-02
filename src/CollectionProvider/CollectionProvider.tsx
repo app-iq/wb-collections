@@ -19,7 +19,7 @@ import { useCollectionDefaults } from '../Defaults/Hooks';
 import { Field } from '../Field/Field';
 import { FetchService } from '../Service/Fetch/FetchService';
 import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
-import { BasicFetchOptions } from '../Service/Fetch/OptionBasedFetchService';
+import { BasicFetchOptions } from '../Service/Fetch/BasicFetchService';
 import { DefaultServiceFactory, ServiceFactory } from '../Service/ServiceFactory';
 
 export interface CollectionProviderProps {
