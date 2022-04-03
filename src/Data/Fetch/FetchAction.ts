@@ -4,14 +4,10 @@ export enum FetchActionType {
     FETCH_START = 'FETCH_ACTION@FETCH_START',
     FETCH_DONE = 'FETCH_ACTION@FETCH_DONE',
     FETCH_FAIL = 'FETCH_ACTION@FETCH_FAIL',
-    SET_LOADING = 'FETCH_ACTION@SET_LOADING',
-    SET_ERROR = 'FETCH_ACTION@SET_ERROR',
-    APPEND_ITEMS = 'FETCH_ACTION@APPEND_DATA',
+    FETCH_MORE_START = 'FETCH_ACTION@FETCH_MORE_START',
+    FETCH_MORE_FAIL = 'FETCH_ACTION@FETCH_MORE_FAIL',
+    FETCH_MORE_DONE = 'FETCH_ACTION@FETCH_MORE_DONE',
     SET_TOTAL_COUNT = 'FETCH_ACTION@SET_TOTAL_COUNT',
-    RESET_PAGE = 'FETCH_ACTION@RESET_PAGE',
-    NEXT_PAGE = 'FETCH_ACTION@RESET_PAGE',
-    PREVIOUS_PAGE = 'FETCH_ACTION@RESET_PAGE',
-    SET_PAGE = 'FETCH_ACTION@SET_PAGE',
 }
 
 export type FetchAction<TPayload> = Action<FetchActionType, TPayload>;
@@ -38,23 +34,23 @@ export class FetchActions {
         };
     }
 
-    public static loading(loading: boolean): FetchAction<boolean> {
+    public static moreStarted(): FetchAction<undefined> {
         return {
-            type: FetchActionType.SET_LOADING,
-            payload: loading,
+            type: FetchActionType.FETCH_MORE_START,
+            payload: undefined,
         };
     }
 
-    public static error(e: unknown): FetchAction<unknown> {
+    public static moreFailed(e: unknown): FetchAction<unknown> {
         return {
-            type: FetchActionType.SET_ERROR,
+            type: FetchActionType.FETCH_MORE_FAIL,
             payload: e,
         };
     }
 
-    public static appendItems(items: unknown[]): FetchAction<unknown[]> {
+    public static moreDone(items: unknown[]): FetchAction<unknown[]> {
         return {
-            type: FetchActionType.APPEND_ITEMS,
+            type: FetchActionType.FETCH_MORE_DONE,
             payload: items,
         };
     }
@@ -63,34 +59,6 @@ export class FetchActions {
         return {
             type: FetchActionType.SET_TOTAL_COUNT,
             payload: totalCount,
-        };
-    }
-
-    public static setPage(page: number): FetchAction<number> {
-        return {
-            type: FetchActionType.SET_PAGE,
-            payload: page,
-        };
-    }
-
-    public static nextPage(): FetchAction<undefined> {
-        return {
-            type: FetchActionType.NEXT_PAGE,
-            payload: undefined,
-        };
-    }
-
-    public static previousPage(): FetchAction<undefined> {
-        return {
-            type: FetchActionType.PREVIOUS_PAGE,
-            payload: undefined,
-        };
-    }
-
-    public static resetPage(): FetchAction<undefined> {
-        return {
-            type: FetchActionType.RESET_PAGE,
-            payload: undefined,
         };
     }
 }

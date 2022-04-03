@@ -4,17 +4,19 @@ export interface OptionsState {
     render: RenderOptions;
 }
 
+export type Element = (() => ReactElement | null) | null;
+
 export interface Elements {
-    loading: (() => ReactElement | null) | null;
-    error: (() => ReactElement | null) | null;
-    empty: (() => ReactElement | null) | null;
-    collection: (() => ReactElement | null) | null;
+    loading: Element;
+    error: Element;
+    empty: Element;
+    collection: Element;
 }
 
 export interface RenderOptions {
-    renderLoading?: (() => ReactElement | null) | null;
-    renderError?: (() => ReactElement | null) | null;
-    renderEmpty?: (() => ReactElement | null) | null;
-    orderElements?: (elements: Elements) => ((() => ReactElement | null) | null)[];
+    renderLoading?: Element;
+    renderError?: Element;
+    renderEmpty?: Element;
+    orderElements?: (elements: Elements) => Element[];
     displayCollectionOnEmpty?: boolean;
 }

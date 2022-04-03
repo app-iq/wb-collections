@@ -15,22 +15,19 @@ export const FetchReducer: Reducer<State, FetchAction<unknown>> = (state, action
                 error: undefined,
                 items: action.payload as unknown[],
             };
-        case FetchActionType.SET_LOADING:
-            return { ...state, loading: action.payload as boolean };
-        case FetchActionType.SET_ERROR:
-            return { ...state, error: action.payload };
-        case FetchActionType.APPEND_ITEMS:
-            return { ...state, items: state.items.concat(action.payload as unknown[]) };
+        case FetchActionType.FETCH_MORE_START:
+            return { ...state, fetchMoreLoading: false, fetchMoreError: undefined };
+        case FetchActionType.FETCH_MORE_FAIL:
+            return { ...state, fetchMoreError: action.payload, fetchMoreLoading: false };
+        case FetchActionType.FETCH_MORE_DONE:
+            return {
+                ...state,
+                items: state.items.concat(action.payload as unknown[]),
+                fetchMoreLoading: false,
+                fetchMoreError: undefined,
+            };
         case FetchActionType.SET_TOTAL_COUNT:
             return { ...state, totalCount: action.payload as number };
-        case FetchActionType.RESET_PAGE:
-            return { ...state, page: 0 };
-        case FetchActionType.NEXT_PAGE:
-            return { ...state, page: state.page + 1 };
-        case FetchActionType.PREVIOUS_PAGE:
-            return { ...state, page: Math.max(state.page - 1, 0) };
-        case FetchActionType.SET_PAGE:
-            return { ...state, page: Math.max(action.payload as number, 0) };
     }
     return state;
 };

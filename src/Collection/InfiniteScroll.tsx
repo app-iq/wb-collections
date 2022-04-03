@@ -24,9 +24,16 @@ export const InfiniteScroll: React.FC<Props> = props => {
             }
             const { scrollTop, scrollHeight, clientHeight } = target;
             if (scrollTop + clientHeight >= scrollHeight - 5) {
-                if (!state.loading && !state.error && state.items.length < state.totalCount) {
+                // TODO : this condition could move to defautls provider or props or both
+                if (
+                    !state.loading &&
+                    !state.fetchMoreLoading &&
+                    !state.error &&
+                    !state.fetchMoreError &&
+                    state.items.length < state.totalCount
+                ) {
                     const fetchService = serviceFactory.createHttpFetchService();
-                    fetchService.fetchMore();
+                    fetchService.fetchNextPage();
                 }
             }
         };
@@ -35,7 +42,7 @@ export const InfiniteScroll: React.FC<Props> = props => {
         });
 
         return () => div.removeEventListener('wheel', listener);
-    });
+    }, [state, serviceFactory, scrollTarget]);
 
     return <div ref={ref}>{props.children}</div>;
 };

@@ -1,18 +1,7 @@
-- withCollection
-- hooks
-- defaults
-- services
-- factories
-
-
-------------------
-
-
-
-X - data actions (insert(3 types) , remove (3 types) , update)
-[put filters when sending http request]
-Test Components (table,list)
-paging && infinity loading
+- paging
+- load more (data cleanup)
+- code cleanup
+- tests
 
 
 
@@ -24,5 +13,7 @@ Plugins:
 
 WORK ITEMS:
 
+- CLEANUP LOAD MORE
+- CLEANUP PAGING
 - code cleanup
 - tests

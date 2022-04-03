@@ -6,7 +6,7 @@ import { State } from './../Data/State';
 import { FetchService } from './Fetch/FetchService';
 export interface ServiceFactory {
     createHttpFetchService(): FetchService;
-    createOptionBasedFetchService(): FetchService;
+    createBasicFetchService(): FetchService;
 }
 
 export class DefaultServiceFactory implements ServiceFactory {
@@ -20,7 +20,7 @@ export class DefaultServiceFactory implements ServiceFactory {
         this.defaults = defaults;
     }
 
-    createOptionBasedFetchService(): FetchService {
+    createBasicFetchService(): FetchService {
         return new BasicFetchService(this.dispatch, this.state.options.fetch as BasicFetchOptions);
     }
 

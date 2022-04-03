@@ -76,7 +76,7 @@ export const CollectionWrapper: React.FC<CollectionWrapperProps> = props => {
         const service: FetchService =
             props.fetcherType === 'http'
                 ? sf.createHttpFetchService()
-                : sf.createOptionBasedFetchService();
+                : sf.createBasicFetchService();
         service.fetch();
     }, [props.fetchOptions]);
 

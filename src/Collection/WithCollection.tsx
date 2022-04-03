@@ -17,7 +17,7 @@ export const withCollection = (Component: React.ComponentType<WithCollectionProp
         const displayCollectionOnEmpty =
             state.options.render.displayCollectionOnEmpty ?? defaults.renderOptions.displayCollectionOnEmpty;
         let collection: (() => ReactElement | null) | null = () => <Component {...props} data={state.items} />;
-        if (state.loading || state.error || (isEmpty && !displayCollectionOnEmpty)) {
+        if ((state.loading && state.items.length === 0) || state.error || (isEmpty && !displayCollectionOnEmpty)) {
             collection = null;
         }
 

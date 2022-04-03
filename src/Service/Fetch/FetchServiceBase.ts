@@ -28,23 +28,21 @@ export abstract class FetchServiceBase implements FetchService {
         }
     }
 
-    async fetchMore(): Promise<void> {
+    async fetchNextPage(): Promise<void> {
         this.shouldCancel = false;
-        this.dispatch(FetchActions.loading(true));
+        this.dispatch(FetchActions.moreStarted());
         try {
             const data = await this.fetchMoreData();
             if (this.shouldCancel) {
                 return;
             }
-            this.dispatch(FetchActions.appendItems(data.items));
+            this.dispatch(FetchActions.moreDone(data.items));
             this.dispatch(FetchActions.setTotalCount(data.totalCount));
         } catch (e) {
             if (this.shouldCancel) {
                 return;
             }
-            this.dispatch(FetchActions.error(e));
-        } finally {
-            this.dispatch(FetchActions.loading(false));
+            this.dispatch(FetchActions.moreFailed(e));
         }
     }
 
