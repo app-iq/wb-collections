@@ -23,6 +23,14 @@ export const FetchReducer: Reducer<State, FetchAction<unknown>> = (state, action
             return { ...state, items: state.items.concat(action.payload as unknown[]) };
         case FetchActionType.SET_TOTAL_COUNT:
             return { ...state, totalCount: action.payload as number };
+        case FetchActionType.RESET_PAGE:
+            return { ...state, page: 0 };
+        case FetchActionType.NEXT_PAGE:
+            return { ...state, page: state.page + 1 };
+        case FetchActionType.PREVIOUS_PAGE:
+            return { ...state, page: Math.max(state.page - 1, 0) };
+        case FetchActionType.SET_PAGE:
+            return { ...state, page: Math.max(action.payload as number, 0) };
     }
     return state;
 };

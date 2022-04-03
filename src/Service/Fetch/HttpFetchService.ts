@@ -20,25 +20,34 @@ export class HttpFetchService extends FetchServiceBase {
         if (customFetch) {
             return customFetch();
         }
-        return this.sendRequest();
+        return this.sendRequest(false);
     }
 
     protected fetchMoreData(): Promise<DataResult> {
-        return this.sendRequest();
+        return this.sendRequest(true);
     }
 
-    private async sendRequest() {
-        const url = this.getValueFromFunctionOrPermitiveType(this.options.url);
+    private async sendRequest(fetchMore: boolean) {
+        let url = this.getValueFromFunctionOrPermitiveType(this.options.url);
         const parseResponse = this.options.parseResponse ?? this.defaults.httpFetcher.parseResponse;
         const buildData = this.options.buildDataResult ?? this.defaults.httpFetcher.buildDataResult;
         const headers = this.options.headers ?? this.defaults.httpFetcher.headers;
-        const options = {
+        let options: RequestInit = {
             method: this.options.method ?? this.defaults.httpFetcher.method,
             body: this.getValueFromFunctionOrPermitiveType(this.options.body),
             headers: this.getValueFromFunctionOrPermitiveType(headers),
             ...this.defaults.httpFetcher.requestOptions,
             ...(this.options.fetchOptions ?? {}),
         };
+
+        if (fetchMore) {
+            const nextPageOptions: NextPageOptionCallback =
+                this.options.nextPageOptions ?? this.defaults.httpFetcher.nextPageOptions;
+            const { url: fmUrl, options: fmOptions } = nextPageOptions(url , options, this.state.totalCount, this.state.items);
+            options = fmOptions;
+            url = fmUrl;
+        }
+
         return fetch(url, options)
             .then(data => parseResponse(data))
             .then(res => buildData(res));
@@ -46,7 +55,7 @@ export class HttpFetchService extends FetchServiceBase {
 
     private getValueFromFunctionOrPermitiveType<T>(value: FunctionOrPermitiveType<T>): T {
         if (typeof value === 'function') {
-            const func = value as ((totalCount: number, data: unknown[]) => T);
+            const func = value as (totalCount: number, data: unknown[]) => T;
             return func(this.state.totalCount, this.state.items);
         }
         return value;
@@ -54,6 +63,12 @@ export class HttpFetchService extends FetchServiceBase {
 }
 
 type FunctionOrPermitiveType<T> = ((totalCount: number, data: unknown[]) => T) | T;
+export type NextPageOptionCallback = (
+    url: string,
+    options: RequestInit,
+    totalCount: number,
+    items: unknown[],
+) => { url: string; options: RequestInit };
 export interface HttpFetchOptions {
     url: FunctionOrPermitiveType<string>;
     method?: string;
@@ -62,6 +77,7 @@ export interface HttpFetchOptions {
     fetchOptions?: RequestInit;
     parseResponse?: (response: Response) => Promise<unknown>;
     buildDataResult?: (parsedResponse: unknown) => DataResult;
+    nextPageOptions?: NextPageOptionCallback;
     fetch?: () => Promise<DataResult>;
     data?: never;
 }

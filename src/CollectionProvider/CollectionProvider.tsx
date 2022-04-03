@@ -6,14 +6,13 @@ import {
     Reducer,
     useDispatch,
     useServiceFactory,
-    useState,
 } from 'wbox-context';
 import { FetchReducer as fetchReducer } from '../Data/Fetch/FetchReducer';
 import { FieldsActions } from '../Data/Fields/FieldsActions';
 import { fieldsReducer } from '../Data/Fields/FieldsReducer';
 import { OptionsActions } from '../Data/Options/OptionsActions';
 import { optionsReducer } from '../Data/Options/OptionsReducer';
-import { buildInitialState, INITIAL_STATE, State } from '../Data/State';
+import { buildInitialState, State } from '../Data/State';
 import { RenderOptions } from '../Data/Types/OptionsState';
 import { useCollectionDefaults } from '../Defaults/Hooks';
 import { Field } from '../Field/Field';

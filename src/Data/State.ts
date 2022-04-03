@@ -11,6 +11,7 @@ export interface State {
     error: unknown;
     items: unknown[];
     totalCount: number;
+    page: number;
     options: {
         render: RenderOptions;
         fetch: FetchOptions;
@@ -20,8 +21,8 @@ export interface State {
 export function buildInitialState(override: Partial<State> = {}): State {
     return {
         ...INITIAL_STATE,
-        ...override
-    }
+        ...override,
+    };
 }
 
 export const INITIAL_STATE: State = {
@@ -30,6 +31,7 @@ export const INITIAL_STATE: State = {
     loading: false,
     error: undefined,
     totalCount: 0,
+    page: 0,
     options: {
         render: {},
         fetch: {

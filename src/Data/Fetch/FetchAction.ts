@@ -8,6 +8,10 @@ export enum FetchActionType {
     SET_ERROR = 'FETCH_ACTION@SET_ERROR',
     APPEND_ITEMS = 'FETCH_ACTION@APPEND_DATA',
     SET_TOTAL_COUNT = 'FETCH_ACTION@SET_TOTAL_COUNT',
+    RESET_PAGE = 'FETCH_ACTION@RESET_PAGE',
+    NEXT_PAGE = 'FETCH_ACTION@RESET_PAGE',
+    PREVIOUS_PAGE = 'FETCH_ACTION@RESET_PAGE',
+    SET_PAGE = 'FETCH_ACTION@SET_PAGE',
 }
 
 export type FetchAction<TPayload> = Action<FetchActionType, TPayload>;
@@ -34,7 +38,7 @@ export class FetchActions {
         };
     }
 
-    public static loading(loading:boolean): FetchAction<boolean> {
+    public static loading(loading: boolean): FetchAction<boolean> {
         return {
             type: FetchActionType.SET_LOADING,
             payload: loading,
@@ -59,6 +63,34 @@ export class FetchActions {
         return {
             type: FetchActionType.SET_TOTAL_COUNT,
             payload: totalCount,
+        };
+    }
+
+    public static setPage(page: number): FetchAction<number> {
+        return {
+            type: FetchActionType.SET_PAGE,
+            payload: page,
+        };
+    }
+
+    public static nextPage(): FetchAction<undefined> {
+        return {
+            type: FetchActionType.NEXT_PAGE,
+            payload: undefined,
+        };
+    }
+
+    public static previousPage(): FetchAction<undefined> {
+        return {
+            type: FetchActionType.PREVIOUS_PAGE,
+            payload: undefined,
+        };
+    }
+
+    public static resetPage(): FetchAction<undefined> {
+        return {
+            type: FetchActionType.RESET_PAGE,
+            payload: undefined,
         };
     }
 }

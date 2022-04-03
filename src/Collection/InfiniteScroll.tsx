@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react';
 import React from 'react';
+import { State } from '../Data/State';
+import { useServiceFactory, useState } from 'wbox-context';
+import { ServiceFactory } from '../Service/ServiceFactory';
 
 interface Props {
     scrollTarget?: 'document' | 'wrapper';
@@ -8,7 +11,9 @@ interface Props {
 export const InfiniteScroll: React.FC<Props> = props => {
     const ref = useRef<any>();
     const scrollTarget = props.scrollTarget ?? 'document';
-    
+    const state: State = useState();
+    const serviceFactory: ServiceFactory = useServiceFactory();
+
     useEffect(() => {
         const div: HTMLDivElement = ref.current;
         const wrapper: HTMLElement | null = div.parentElement;
@@ -19,7 +24,10 @@ export const InfiniteScroll: React.FC<Props> = props => {
             }
             const { scrollTop, scrollHeight, clientHeight } = target;
             if (scrollTop + clientHeight >= scrollHeight - 5) {
-                console.log('Load More...');
+                if (!state.loading && !state.error && state.items.length < state.totalCount) {
+                    const fetchService = serviceFactory.createHttpFetchService();
+                    fetchService.fetchMore();
+                }
             }
         };
         div.addEventListener('wheel', listener, {

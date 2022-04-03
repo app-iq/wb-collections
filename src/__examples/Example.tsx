@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { InfiniteScroll } from '../Collection/InfiniteScroll';
 import { CollectionProvider } from '../CollectionProvider/CollectionProvider';
 import { Field } from '../Field/Field';
@@ -10,7 +10,11 @@ export function Example() {
 
     const dataOptions: HttpFetchOptions = {
         url: url,
-        buildDataResult: (res: any) => ({ items: res.data, totalCount: res.data.length }),
+        buildDataResult: (res: any) => ({ items: res.data, totalCount: res.totalCount }),
+        nextPageOptions: (url, options, totalCount) => {
+            url = `http://localhost:8080/collection?page=${1}`;
+            return { url, options };
+        },
     };
     const fields: Field[] = [
         { name: 'id', title: '#' },

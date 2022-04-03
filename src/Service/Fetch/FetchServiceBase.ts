@@ -44,7 +44,7 @@ export abstract class FetchServiceBase implements FetchService {
             }
             this.dispatch(FetchActions.error(e));
         } finally {
-            this.dispatch(FetchActions.loading(true));
+            this.dispatch(FetchActions.loading(false));
         }
     }
 
