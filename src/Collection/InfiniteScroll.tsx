@@ -3,14 +3,19 @@ import React from 'react';
 import { State } from '../Data/State';
 import { useServiceFactory, useState } from 'wbox-context';
 import { ServiceFactory } from '../Service/ServiceFactory';
+import { useCollectionDefaults } from '../Defaults/Hooks';
 
 interface Props {
     scrollTarget?: 'document' | 'wrapper';
+    threshold?: number;
 }
 
 export const InfiniteScroll: React.FC<Props> = props => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const ref = useRef<any>();
+    const defaults = useCollectionDefaults();
     const scrollTarget = props.scrollTarget ?? 'document';
+    const threshold = props.threshold ?? defaults.renderOptions.infinityScrollThreshold;
     const state: State = useState();
     const serviceFactory: ServiceFactory = useServiceFactory();
 
@@ -23,7 +28,7 @@ export const InfiniteScroll: React.FC<Props> = props => {
                 return;
             }
             const { scrollTop, scrollHeight, clientHeight } = target;
-            if (scrollTop + clientHeight >= scrollHeight - 5) {
+            if (scrollTop + clientHeight >= scrollHeight - threshold) {
                 // TODO : this condition could move to defautls provider or props or both
                 if (
                     !state.loading &&
@@ -42,7 +47,7 @@ export const InfiniteScroll: React.FC<Props> = props => {
         });
 
         return () => div.removeEventListener('wheel', listener);
-    }, [state, serviceFactory, scrollTarget]);
+    }, [state, serviceFactory, scrollTarget , threshold]);
 
     return <div ref={ref}>{props.children}</div>;
 };

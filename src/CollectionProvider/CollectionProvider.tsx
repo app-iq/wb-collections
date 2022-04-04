@@ -1,25 +1,16 @@
-import React, { useEffect, useMemo } from 'react';
-import {
-    Action,
-    CoreProvider,
-    DispatchFunction,
-    Reducer,
-    useDispatch,
-    useServiceFactory,
-} from 'wbox-context';
+import React, { useCallback, useMemo } from 'react';
+import { Action, CoreProvider, DispatchFunction, Reducer } from 'wbox-context';
 import { FetchReducer as fetchReducer } from '../Data/Fetch/FetchReducer';
-import { FieldsActions } from '../Data/Fields/FieldsActions';
 import { fieldsReducer } from '../Data/Fields/FieldsReducer';
-import { OptionsActions } from '../Data/Options/OptionsActions';
 import { optionsReducer } from '../Data/Options/OptionsReducer';
 import { buildInitialState, State } from '../Data/State';
 import { RenderOptions } from '../Data/Types/OptionsState';
 import { useCollectionDefaults } from '../Defaults/Hooks';
 import { Field } from '../Field/Field';
-import { FetchService } from '../Service/Fetch/FetchService';
-import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
 import { BasicFetchOptions } from '../Service/Fetch/BasicFetchService';
+import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
 import { DefaultServiceFactory, ServiceFactory } from '../Service/ServiceFactory';
+import { CollectionWrapper } from './CollectionWrapper';
 
 export interface CollectionProviderProps {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -33,22 +24,22 @@ export interface CollectionProviderProps {
 const baseReducers = [fieldsReducer, fetchReducer, optionsReducer];
 
 export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
-    const fetcherType: FetcherType = props.fetchOptions.data !== undefined ? 'direct' : 'http';
-    const reducers = baseReducers.concat(props.reducers ?? []);
+    const fetcherType = props.fetchOptions.data !== undefined ? 'direct' : 'http';
+    const reducers = useMemo(() => baseReducers.concat(props.reducers ?? []), [props.reducers]);
+    const createServiceFactory = useCallback(
+        (dispatch, state) =>
+            props.serviceFactory
+                ? props.serviceFactory(dispatch, state as State)
+                : new DefaultServiceFactory(state as State, dispatch, defaults),
+        [props.serviceFactory],
+    );
     const defaults = useCollectionDefaults();
-    const initialState = useMemo(() => buildInitialState({options: {render: props.renderOptions ?? {} , fetch: props.fetchOptions}}) , []);
+    const initialState = useMemo(
+        () => buildInitialState({ options: { render: props.renderOptions ?? {}, fetch: props.fetchOptions } }),
+        [],
+    );
     return (
-        <CoreProvider
-            //todo : use memo
-            reducers={reducers}
-            //todo : use callback
-            createServiceFactory={(dispatch, state) =>
-                props.serviceFactory
-                    ? props.serviceFactory(dispatch, state as State)
-                    : new DefaultServiceFactory(state as State, dispatch, defaults)
-            }
-            initialState={initialState}
-        >
+        <CoreProvider reducers={reducers} createServiceFactory={createServiceFactory} initialState={initialState}>
             <CollectionWrapper fetcherType={fetcherType} fields={props.fields} fetchOptions={props.fetchOptions}>
                 {props.children}
             </CollectionWrapper>
@@ -56,29 +47,3 @@ export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
     );
 };
 
-type FetcherType = 'http' | 'direct';
-interface CollectionWrapperProps {
-    fetcherType: FetcherType;
-    fetchOptions: BasicFetchOptions | HttpFetchOptions;
-    fields: Field[];
-}
-
-export const CollectionWrapper: React.FC<CollectionWrapperProps> = props => {
-    const dispatch = useDispatch();
-    const sf: ServiceFactory = useServiceFactory();
-
-    useEffect(() => {
-        dispatch(OptionsActions.setFetchOptions(props.fetchOptions))
-        dispatch(FieldsActions.set(props.fields));
-    }, [dispatch, props.fetchOptions]);
-
-    useEffect(() => {
-        const service: FetchService =
-            props.fetcherType === 'http'
-                ? sf.createHttpFetchService()
-                : sf.createBasicFetchService();
-        service.fetch();
-    }, [props.fetchOptions]);
-
-    return <div>{props.children}</div>;
-};

@@ -21,6 +21,7 @@ export interface CollectionsDefaults {
         renderEmpty: () => ReactElement | null;
         displayCollectionOnEmpty: boolean;
         orderElements: (elements: Elements) => ((() => ReactElement | null) | null)[];
+        infinityScrollThreshold: number;
     };
 }
 
@@ -43,10 +44,11 @@ const defaults: CollectionsDefaults = {
     },
     renderOptions: {
         renderEmpty: () => <h1>Empty</h1>,
-        renderLoading: () => <h1>Loading</h1>,
+        renderLoading: () => <h1>Loading...</h1>,
         renderError: () => <h1>Error</h1>,
         displayCollectionOnEmpty: false,
         orderElements: defaultOrderElements,
+        infinityScrollThreshold: 10
     },
 };
 

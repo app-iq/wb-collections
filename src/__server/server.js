@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 const express = require("express");
 const cors = require("cors");
 
@@ -19,7 +21,7 @@ for(let i=0;i<100;i++){
 }
 result = result.map((item,index) => ({...item , id: index+1}));
 
-app.get('/collection', function (req, res, next) {
+app.get('/collection', function (req, res) {
     
     const page = req.query.page ?? 0;
     const pageSize = 100;
