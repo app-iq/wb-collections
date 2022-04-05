@@ -1,7 +1,7 @@
 import React, { Fragment, ReactElement } from 'react';
 import { useState } from 'wbox-context';
 import { State } from '../Data/State';
-import { Elements } from '../Data/Types/OptionsState';
+import { Elements } from '../Data/Types/Elements';
 import { CollectionsDefaults } from '../Defaults/DefaultsContext';
 import { useCollectionDefaults } from '../Defaults/Hooks';
 
@@ -17,6 +17,7 @@ export const withCollection = (Component: React.ComponentType<WithCollectionProp
         const displayCollectionOnEmpty =
             state.options.render.displayCollectionOnEmpty ?? defaults.renderOptions.displayCollectionOnEmpty;
         let collection: (() => ReactElement | null) | null = () => <Component {...props} data={state.items} />;
+        // TODO : maybe this could move into defaults (check logic)
         if ((state.loading && state.items.length === 0) || state.error || (isEmpty && !displayCollectionOnEmpty)) {
             collection = null;
         }

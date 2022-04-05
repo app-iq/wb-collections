@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Elements } from '../Data/Types/OptionsState';
+import { Elements } from '../Data/Types/Elements';
 import { NextPageOptionCallback } from '../Service/Fetch/HttpFetchService';
 import { DataResult } from './../Service/Fetch/FetchServiceBase';
 

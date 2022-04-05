@@ -1,4 +1,4 @@
-import { RenderOptions } from './../Types/OptionsState';
+import { RenderOptions } from '../Types/Elements';
 import { Reducer } from 'wbox-context';
 import { FetchOptions, State } from '../State';
 import { OptionsAction, OptionsActionType } from './OptionsActions';

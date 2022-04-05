@@ -1,9 +1,5 @@
 import { ReactElement } from 'react';
 
-export interface OptionsState {
-    render: RenderOptions;
-}
-
 export type Element = (() => ReactElement | null) | null;
 
 export interface Elements {

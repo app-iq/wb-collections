@@ -4,7 +4,7 @@ import { FetchReducer as fetchReducer } from '../Data/Fetch/FetchReducer';
 import { fieldsReducer } from '../Data/Fields/FieldsReducer';
 import { optionsReducer } from '../Data/Options/OptionsReducer';
 import { buildInitialState, State } from '../Data/State';
-import { RenderOptions } from '../Data/Types/OptionsState';
+import { RenderOptions } from '../Data/Types/Elements';
 import { useCollectionDefaults } from '../Defaults/Hooks';
 import { Field } from '../Field/Field';
 import { BasicFetchOptions } from '../Service/Fetch/BasicFetchService';
