@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { Action, CoreProvider, DispatchFunction, Reducer } from 'wbox-context';
-import { FetchReducer as fetchReducer } from '../Data/Fetch/FetchReducer';
+import { fetchReducer as fetchReducer } from '../Data/Fetch/FetchReducer';
 import { fieldsReducer } from '../Data/Fields/FieldsReducer';
 import { optionsReducer } from '../Data/Options/OptionsReducer';
 import { buildInitialState, State } from '../Data/State';
