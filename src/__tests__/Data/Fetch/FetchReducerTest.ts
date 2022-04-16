@@ -27,17 +27,17 @@ describe('Fetch Reducer', () => {
 
 
     it('should handle set data action', () => {
-        const state = buildState({ items: [{}, {}] });
+        const state = buildState({ allItems: [{}, {}] });
         const action = FetchActions.setData([{}]);
         const newState = fetchReducer(state, action);
-        expect(newState).toEqual(buildState({ items: [{}] }));
+        expect(newState).toEqual(buildState({ allItems: [{}] }));
     });
 
     it('should handle append data action', () => {
-        const state = buildState({ items: [{}] });
+        const state = buildState({ allItems: [{}] });
         const action = FetchActions.appendData([{}]);
         const newState = fetchReducer(state, action);
-        expect(newState).toEqual(buildState({ items: [{}, {}] }));
+        expect(newState).toEqual(buildState({ allItems: [{}, {}] }));
     });
 
     it('should handle set total count action', () => {

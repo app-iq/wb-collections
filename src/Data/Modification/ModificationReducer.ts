@@ -22,7 +22,7 @@ export const modificationReducer: Reducer<State, ModificationAction<unknown>> = 
 };
 
 const insert = (state: State, payload: InsertActionPayload) => {
-    const data = [...state.items];
+    const data = [...state.allItems];
     data.splice(getIndex(payload.index, data), 0, payload.record);
     return {
         ...state,
@@ -31,7 +31,7 @@ const insert = (state: State, payload: InsertActionPayload) => {
 };
 
 const remove = (state: State, index: Index) => {
-    const data = [...state.items];
+    const data = [...state.allItems];
     data.splice(getIndex(index, data), 1);
     return {
         ...state,
@@ -40,7 +40,7 @@ const remove = (state: State, index: Index) => {
 };
 
 const update = (state: State, payload: UpdateActionPayload) => {
-    const data = [...state.items];
+    const data = [...state.allItems];
     const index = getIndex(payload.index, data);
     const item = data[index];
     data[index] = { ...(item as object), ...payload.changePayload };

@@ -13,12 +13,12 @@ export const withCollection = (Component: React.ComponentType<WithCollectionProp
     return function WithCollection(props: object) {
         const state: State = useState();
         const defaults = useCollectionDefaults();
-        const isEmpty = state.items.length === 0 && !state.loading && !state.error;
+        const isEmpty = state.allItems.length === 0 && !state.loading && !state.error;
         const displayCollectionOnEmpty =
             state.options.render.displayCollectionOnEmpty ?? defaults.renderOptions.displayCollectionOnEmpty;
-        let collection: (() => ReactElement | null) | null = () => <Component {...props} data={state.items} />;
+        let collection: (() => ReactElement | null) | null = () => <Component {...props} data={state.allItems} />;
         // TODO : maybe this could move into defaults (check logic)
-        if ((state.loading && state.items.length === 0) || state.error || (isEmpty && !displayCollectionOnEmpty)) {
+        if ((state.loading && state.allItems.length === 0) || state.error || (isEmpty && !displayCollectionOnEmpty)) {
             collection = null;
         }
 

@@ -7,9 +7,11 @@ export type FetchOptions = HttpFetchOptions | BasicFetchOptions;
 
 export interface State {
     fields: Field[];
+    visibleFields: string[];
     loading: boolean;
     error: unknown;
-    items: unknown[];
+    allItems: unknown[];
+    displayedItems: unknown[];
     totalCount: number;
     page: number;
     options: {
@@ -27,7 +29,9 @@ export function buildInitialState(override: Partial<State> = {}): State {
 
 export const INITIAL_STATE: State = {
     fields: [],
-    items: [],
+    visibleFields: [],
+    allItems: [],
+    displayedItems: [],
     loading: false,
     error: undefined,
     totalCount: 0,

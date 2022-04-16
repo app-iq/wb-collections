@@ -43,7 +43,7 @@ export class HttpFetchService extends FetchServiceBase {
         if (fetchMore) {
             const nextPageOptions: NextPageOptionCallback =
                 this.options.nextPageOptions ?? this.defaults.httpFetcher.nextPageOptions;
-            const { url: fmUrl, options: fmOptions } = nextPageOptions(url , options, this.state.totalCount, this.state.items);
+            const { url: fmUrl, options: fmOptions } = nextPageOptions(url , options, this.state.totalCount, this.state.allItems);
             options = fmOptions;
             url = fmUrl;
         }
@@ -56,7 +56,7 @@ export class HttpFetchService extends FetchServiceBase {
     private getValueFromFunctionOrPermitiveType<T>(value: FunctionOrPermitiveType<T>): T {
         if (typeof value === 'function') {
             const func = value as (totalCount: number, data: unknown[]) => T;
-            return func(this.state.totalCount, this.state.items);
+            return func(this.state.totalCount, this.state.allItems);
         }
         return value;
     }

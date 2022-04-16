@@ -9,11 +9,11 @@ export const fetchReducer: Reducer<State, FetchAction<unknown>> = (state, action
         case FetchActionType.SET_ERROR:
             return { ...state, error: action.payload };
         case FetchActionType.SET_DATA:
-            return { ...state, items: action.payload as unknown[] };
+            return { ...state, allItems: action.payload as unknown[] };
         case FetchActionType.APPEND_DATA:
             return {
                 ...state,
-                items: state.items.concat(action.payload as unknown[]),
+                allItems: state.allItems.concat(action.payload as unknown[]),
             };
         case FetchActionType.SET_TOTAL_COUNT:
             return { ...state, totalCount: action.payload as number };

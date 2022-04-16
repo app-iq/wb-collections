@@ -35,7 +35,7 @@ describe('Fetch Actions', () => {
         });
     });
 
-    it('should return startMore action', () => {
+    it('should return set total count action', () => {
         const totalCount = 10;
         const action = FetchActions.setTotalCount(totalCount);
         expect(action).toEqual({

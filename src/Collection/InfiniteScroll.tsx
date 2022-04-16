@@ -30,7 +30,7 @@ export const InfiniteScroll: React.FC<Props> = props => {
             const { scrollTop, scrollHeight, clientHeight } = target;
             if (scrollTop + clientHeight >= scrollHeight - threshold) {
                 // TODO : this condition could move to defaults provider or props or both
-                if (!state.loading && !state.error && state.items.length < state.totalCount) {
+                if (!state.loading && !state.error && state.allItems.length < state.totalCount) {
                     const fetchService = serviceFactory.createHttpFetchService();
                     fetchService.fetchNextPage();
                 }
