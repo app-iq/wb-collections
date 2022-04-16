@@ -21,32 +21,36 @@ export const modificationReducer: Reducer<State, ModificationAction<unknown>> = 
     return state;
 };
 
-const insert = (state: State, payload: InsertActionPayload) => {
+const insert = (state: State, payload: InsertActionPayload): State => {
     const data = [...state.allItems];
-    data.splice(getIndex(payload.index, data), 0, payload.record);
+    if (payload.index === "last") {
+        data.push(payload.record);
+    } else {
+        data.splice(getIndex(payload.index, data), 0, payload.record);
+    }
     return {
         ...state,
-        data: data,
+        allItems: data,
     };
 };
 
-const remove = (state: State, index: Index) => {
+const remove = (state: State, index: Index): State => {
     const data = [...state.allItems];
     data.splice(getIndex(index, data), 1);
     return {
         ...state,
-        data: data,
+        allItems: data,
     };
 };
 
-const update = (state: State, payload: UpdateActionPayload) => {
+const update = (state: State, payload: UpdateActionPayload): State => {
     const data = [...state.allItems];
     const index = getIndex(payload.index, data);
-    const item = data[index];
-    data[index] = { ...(item as object), ...payload.changePayload };
+    const item = data[index] as object;
+    data[index] = { ...item, ...payload.changePayload };
     return {
         ...state,
-        data: data,
+        allItems: data,
     };
 };
 

@@ -11,7 +11,8 @@ export interface State {
     loading: boolean;
     error: unknown;
     allItems: unknown[];
-    displayedItems: unknown[];
+    start:number;
+    end:number;
     totalCount: number;
     page: number;
     options: {
@@ -31,7 +32,8 @@ export const INITIAL_STATE: State = {
     fields: [],
     visibleFields: [],
     allItems: [],
-    displayedItems: [],
+    start:0,
+    end:0,
     loading: false,
     error: undefined,
     totalCount: 0,

@@ -3,7 +3,7 @@ import { Action } from 'wbox-context';
 export enum ModificationActionType {
     INSERT = 'ModificationAction@INSERT',
     UPDATE = 'ModificationAction@UPDATE',
-    REMOVE = 'ModificationAction@UPDATE',
+    REMOVE = 'ModificationAction@REMOVE',
 }
 
 export type ModificationAction<TPayload> = Action<ModificationActionType, TPayload>;
