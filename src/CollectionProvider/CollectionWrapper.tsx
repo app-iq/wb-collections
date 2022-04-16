@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useServiceFactory } from 'wbox-context';
 import { FieldsActions } from '../Data/Fields/FieldsActions';
-import { OptionsActions } from '../Data/Options/OptionsActions';
 import { Field } from '../Field/Field';
 import { BasicFetchOptions } from '../Service/Fetch/BasicFetchService';
 import { FetchService } from '../Service/Fetch/FetchService';
@@ -21,7 +20,6 @@ export const CollectionWrapper: React.FC<CollectionWrapperProps> = props => {
     const serviceFactory: ServiceFactory = useServiceFactory();
 
     useEffect(() => {
-        dispatch(OptionsActions.setFetchOptions(props.fetchOptions));
         dispatch(FieldsActions.set(props.fields));
     }, [dispatch, props.fetchOptions]);
 

@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from 'react';
 import { Action, CoreProvider, DispatchFunction, Reducer } from 'wbox-context';
 import { fetchReducer as fetchReducer } from '../Data/Fetch/FetchReducer';
 import { fieldsReducer } from '../Data/Fields/FieldsReducer';
-import { optionsReducer } from '../Data/Options/OptionsReducer';
 import { buildInitialState, State } from '../Data/State';
 import { RenderOptions } from '../Data/Types/Elements';
 import { useCollectionDefaults } from '../Defaults/Hooks';
@@ -21,7 +20,7 @@ export interface CollectionProviderProps {
     fields: Field[];
 }
 
-const baseReducers = [fieldsReducer, fetchReducer, optionsReducer];
+const baseReducers = [fieldsReducer, fetchReducer];
 
 export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
     const fetcherType = props.fetchOptions.data !== undefined ? 'direct' : 'http';
@@ -30,12 +29,12 @@ export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
         (dispatch, state) =>
             props.serviceFactory
                 ? props.serviceFactory(dispatch, state as State)
-                : new DefaultServiceFactory(state as State, dispatch, defaults),
+                : new DefaultServiceFactory(state as State, dispatch, defaults , props),
         [props.serviceFactory],
     );
     const defaults = useCollectionDefaults();
     const initialState = useMemo(
-        () => buildInitialState({ options: { render: props.renderOptions ?? {}, fetch: props.fetchOptions } }),
+        () => buildInitialState(),
         [],
     );
     return (
