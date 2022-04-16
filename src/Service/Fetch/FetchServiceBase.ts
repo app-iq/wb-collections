@@ -11,47 +11,44 @@ export abstract class FetchServiceBase implements FetchService {
     }
 
     async fetch(): Promise<void> {
-        this.shouldCancel = false;
-        this.dispatch(FetchActions.start());
-        try {
-            const data = await this.fetchData();
-            if (this.shouldCancel) {
-                return;
-            }
-            this.dispatch(FetchActions.done(data.items));
-            this.dispatch(FetchActions.setTotalCount(data.totalCount));
-        } catch (e) {
-            if (this.shouldCancel) {
-                return;
-            }
-            this.dispatch(FetchActions.fail(e));
-        }
+        this.dispatch(FetchActions.setData([]));
+        await this.handleFetch(() => this.fetchData());
     }
 
     async fetchNextPage(): Promise<void> {
+        await this.handleFetch(() => this.fetchNextPageData());
+    }
+
+    async handleFetch(fetchCallback: () => Promise<DataResult>): Promise<void> {
         this.shouldCancel = false;
-        this.dispatch(FetchActions.moreStarted());
+        this.dispatch(FetchActions.setLoading(true));
+        this.dispatch(FetchActions.setError(null));
         try {
-            const data = await this.fetchMoreData();
+            const data = await fetchCallback();
             if (this.shouldCancel) {
                 return;
             }
-            this.dispatch(FetchActions.moreDone(data.items));
+            this.dispatch(FetchActions.appendData(data.items));
             this.dispatch(FetchActions.setTotalCount(data.totalCount));
+            this.dispatch(FetchActions.setLoading(false));
+            this.dispatch(FetchActions.setError(null));
         } catch (e) {
             if (this.shouldCancel) {
                 return;
             }
-            this.dispatch(FetchActions.moreFailed(e));
+            this.dispatch(FetchActions.setError(e));
+            this.dispatch(FetchActions.setLoading(false));
         }
     }
 
     cancel(): void {
         this.shouldCancel = true;
+        this.dispatch(FetchActions.setLoading(false));
+        this.dispatch(FetchActions.setError(null));
     }
 
     protected abstract fetchData(): Promise<DataResult>;
-    protected abstract fetchMoreData(): Promise<DataResult>;
+    protected abstract fetchNextPageData(): Promise<DataResult>;
 }
 
 export interface DataResult {

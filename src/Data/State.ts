@@ -8,9 +8,7 @@ export type FetchOptions = HttpFetchOptions | BasicFetchOptions;
 export interface State {
     fields: Field[];
     loading: boolean;
-    fetchMoreLoading: boolean;
     error: unknown;
-    fetchMoreError: unknown;
     items: unknown[];
     totalCount: number;
     page: number;
@@ -31,9 +29,7 @@ export const INITIAL_STATE: State = {
     fields: [],
     items: [],
     loading: false,
-    fetchMoreLoading: false, 
     error: undefined,
-    fetchMoreError: undefined,
     totalCount: 0,
     page: 0,
     options: {

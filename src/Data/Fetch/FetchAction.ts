@@ -1,57 +1,41 @@
 import { Action } from 'wbox-context';
 
 export enum FetchActionType {
-    FETCH_START = 'FETCH_ACTION@FETCH_START',
-    FETCH_DONE = 'FETCH_ACTION@FETCH_DONE',
-    FETCH_FAIL = 'FETCH_ACTION@FETCH_FAIL',
-    FETCH_MORE_START = 'FETCH_ACTION@FETCH_MORE_START',
-    FETCH_MORE_FAIL = 'FETCH_ACTION@FETCH_MORE_FAIL',
-    FETCH_MORE_DONE = 'FETCH_ACTION@FETCH_MORE_DONE',
+    SET_LOADING = 'FETCH_ACTION@SET_START',
+    APPEND_DATA = 'FETCH_ACTION@APPEND_DATA',
+    SET_DATA = 'FETCH_ACTION@SET_DATA',
+    SET_ERROR = 'FETCH_ACTION@SET_ERROR',
     SET_TOTAL_COUNT = 'FETCH_ACTION@SET_TOTAL_COUNT',
 }
 
 export type FetchAction<TPayload> = Action<FetchActionType, TPayload>;
 
 export class FetchActions {
-    public static start(): FetchAction<undefined> {
+    public static setLoading(loading: boolean): FetchAction<boolean> {
         return {
-            type: FetchActionType.FETCH_START,
-            payload: undefined,
+            type: FetchActionType.SET_LOADING,
+            payload: loading,
         };
     }
 
-    public static done(data: unknown[]): FetchAction<unknown[]> {
+    public static setData(data: unknown[]): FetchAction<unknown[]> {
         return {
-            type: FetchActionType.FETCH_DONE,
+            type: FetchActionType.SET_DATA,
             payload: data,
         };
     }
 
-    public static fail(error: unknown): FetchAction<unknown> {
+    public static appendData(data: unknown[]): FetchAction<unknown[]> {
         return {
-            type: FetchActionType.FETCH_FAIL,
+            type: FetchActionType.APPEND_DATA,
+            payload: data,
+        };
+    }
+
+    public static setError(error: unknown): FetchAction<unknown> {
+        return {
+            type: FetchActionType.SET_ERROR,
             payload: error,
-        };
-    }
-
-    public static moreStarted(): FetchAction<undefined> {
-        return {
-            type: FetchActionType.FETCH_MORE_START,
-            payload: undefined,
-        };
-    }
-
-    public static moreFailed(e: unknown): FetchAction<unknown> {
-        return {
-            type: FetchActionType.FETCH_MORE_FAIL,
-            payload: e,
-        };
-    }
-
-    public static moreDone(items: unknown[]): FetchAction<unknown[]> {
-        return {
-            type: FetchActionType.FETCH_MORE_DONE,
-            payload: items,
         };
     }
 

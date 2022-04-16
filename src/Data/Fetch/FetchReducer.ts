@@ -4,27 +4,14 @@ import { Reducer } from 'wbox-context';
 
 export const FetchReducer: Reducer<State, FetchAction<unknown>> = (state, action) => {
     switch (action.type) {
-        case FetchActionType.FETCH_START:
-            return { ...state, loading: true, error: undefined, items: [] };
-        case FetchActionType.FETCH_FAIL:
-            return { ...state, loading: false, error: action.payload, items: [] };
-        case FetchActionType.FETCH_DONE:
-            return {
-                ...state,
-                loading: false,
-                error: undefined,
-                items: action.payload as unknown[],
-            };
-        case FetchActionType.FETCH_MORE_START:
-            return { ...state, fetchMoreLoading: false, fetchMoreError: undefined };
-        case FetchActionType.FETCH_MORE_FAIL:
-            return { ...state, fetchMoreError: action.payload, fetchMoreLoading: false };
-        case FetchActionType.FETCH_MORE_DONE:
+        case FetchActionType.SET_LOADING:
+            return { ...state, loading: action.payload as boolean };
+        case FetchActionType.SET_ERROR:
+            return { ...state, error: action.payload };
+        case FetchActionType.APPEND_DATA:
             return {
                 ...state,
                 items: state.items.concat(action.payload as unknown[]),
-                fetchMoreLoading: false,
-                fetchMoreError: undefined,
             };
         case FetchActionType.SET_TOTAL_COUNT:
             return { ...state, totalCount: action.payload as number };

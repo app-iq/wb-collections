@@ -1,57 +1,39 @@
 import { FetchActions, FetchActionType } from './../../../Data/Fetch/FetchAction';
 describe('Fetch Actions', () => {
-    it('should return start action', () => {
-        const action = FetchActions.start();
+    it('should return set loading action', () => {
+        const action = FetchActions.setLoading(true);
         expect(action).toEqual({
-            type: FetchActionType.FETCH_START,
-            payload: undefined,
+            type: FetchActionType.SET_LOADING,
+            payload: true,
         });
     });
 
     it('should return fail action', () => {
         const exception = {};
-        const action = FetchActions.fail(exception);
+        const action = FetchActions.setError(exception);
         expect(action).toEqual({
-            type: FetchActionType.FETCH_FAIL,
+            type: FetchActionType.SET_ERROR,
             payload: exception,
         });
     });
 
-    it('should return done action', () => {
+    it('should return set data action', () => {
         const data = [{} , {}];
-        const action = FetchActions.done(data);
+        const action = FetchActions.setData(data);
         expect(action).toEqual({
-            type: FetchActionType.FETCH_DONE,
+            type: FetchActionType.SET_DATA,
             payload: data,
         });
     });
 
-    it('should return startMore action', () => {
-        const action = FetchActions.moreStarted();
+    it('should return append data action', () => {
+        const data = [{} , {}];
+        const action = FetchActions.appendData(data);
         expect(action).toEqual({
-            type: FetchActionType.FETCH_MORE_START,
-            payload: undefined,
-        });
-    });
-
-    it('should return moreFailed action', () => {
-        const exception = {};
-        const action = FetchActions.moreFailed(exception);
-        expect(action).toEqual({
-            type: FetchActionType.FETCH_MORE_FAIL,
-            payload: exception,
-        });
-    });
-
-    it('should return moreDone action', () => {
-        const data = [{} , {} , {}];
-        const action = FetchActions.moreDone(data);
-        expect(action).toEqual({
-            type: FetchActionType.FETCH_MORE_DONE,
+            type: FetchActionType.APPEND_DATA,
             payload: data,
         });
     });
-
 
     it('should return startMore action', () => {
         const totalCount = 10;

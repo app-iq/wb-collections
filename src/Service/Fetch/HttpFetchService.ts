@@ -23,7 +23,7 @@ export class HttpFetchService extends FetchServiceBase {
         return this.sendRequest(false);
     }
 
-    protected fetchMoreData(): Promise<DataResult> {
+    protected fetchNextPageData(): Promise<DataResult> {
         return this.sendRequest(true);
     }
 

@@ -18,8 +18,8 @@ export class BasicFetchService extends FetchServiceBase {
         });
     }
 
-    protected fetchMoreData(): Promise<DataResult> {
-        throw Error("BasicFetchService dosen't support fetch more");
+    protected fetchNextPageData(): Promise<DataResult> {
+        throw Error("BasicFetchService doesn't support pagination");
     }
 }
 
