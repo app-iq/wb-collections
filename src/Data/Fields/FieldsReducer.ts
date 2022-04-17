@@ -6,15 +6,18 @@ import { Reducer } from 'wbox-context';
 export const fieldsReducer: Reducer<State, FieldsAction<unknown>> = (state, action) => {
     switch (action.type) {
         case FieldsActionType.SET:
-            const fields = action.payload as Field[];
-            return { ...state, fields: fields, visibleFields: fields.map(f => f.name) };
+            return setFields(state , action.payload as Field[]);
         case FieldsActionType.TOGGLE_VISIBILITY:
             return toggleVisibility(state, action.payload as string);
         case FieldsActionType.MOVE:
             return move(state, action.payload as MoveFieldPayload);
     }
-    return state;
 };
+
+function setFields(state:State , fields: Field[]) {
+    return { ...state, fields: fields, visibleFields: fields.map(f => f.name) };
+}
+
 function toggleVisibility(state: State, fieldName: string): State {
     const visibleFields = [...state.visibleFields];
     const index = visibleFields.indexOf(fieldName);
