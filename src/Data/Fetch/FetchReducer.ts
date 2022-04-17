@@ -18,4 +18,5 @@ export const fetchReducer: Reducer<State, FetchAction<unknown>> = (state, action
         case FetchActionType.SET_TOTAL_COUNT:
             return { ...state, totalCount: action.payload as number };
     }
+    return state;
 };

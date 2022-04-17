@@ -1,0 +1,20 @@
+- paging
+- factory
+- load more (data cleanup) & paging
+- useCollectionData hook / withCollectionData HOC
+- code cleanup
+- testing
+
+Plugins:
+- tailwindcss with factories & theme
+
+
+Next Version:
+- filtering & ordering [LATER]
+
+WORK ITEMS:
+
+- CLEANUP LOAD MORE
+- CLEANUP PAGING
+- code cleanup
+- tests

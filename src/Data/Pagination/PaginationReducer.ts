@@ -16,4 +16,5 @@ export const paginationReducer: Reducer<State, PaginationAction<unknown>> = (sta
         case PaginationActionType.SET_START_FROM:
             return { ...state, start: action.payload as number };
     }
+    return state;
 };

@@ -20,7 +20,7 @@ export interface CollectionProviderProps {
     fields: Field[];
 }
 
-const baseReducers = [fieldsReducer, fetchReducer];
+const baseReducers = [fetchReducer , fieldsReducer];
 
 export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
     const fetcherType = props.fetchOptions.data !== undefined ? 'direct' : 'http';

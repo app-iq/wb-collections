@@ -12,6 +12,7 @@ export const fieldsReducer: Reducer<State, FieldsAction<unknown>> = (state, acti
         case FieldsActionType.MOVE:
             return move(state, action.payload as MoveFieldPayload);
     }
+    return state;
 };
 
 function setFields(state:State , fields: Field[]) {

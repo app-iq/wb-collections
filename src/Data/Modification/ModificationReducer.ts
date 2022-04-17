@@ -18,6 +18,7 @@ export const modificationReducer: Reducer<State, ModificationAction<unknown>> = 
         case ModificationActionType.UPDATE:
             return update(state, action.payload as UpdateActionPayload);
     }
+    return state;
 };
 
 const insert = (state: State, payload: InsertActionPayload): State => {
