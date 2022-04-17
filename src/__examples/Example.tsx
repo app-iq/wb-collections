@@ -3,7 +3,8 @@ import { InfiniteScroll } from '../Collection/InfiniteScroll';
 import { CollectionProvider } from '../CollectionProvider/CollectionProvider';
 import { Field } from '../Field/Field';
 import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
-import { Table } from './TableCollection';
+import { Table } from '../Factory/TableCollection';
+import { DefaultCollectionFactory } from '../Factory/DefaultCollectionFactory';
 
 export function Example() {
     const [url, setUrl] = useState('http://localhost:8080/collection');
@@ -25,6 +26,8 @@ export function Example() {
         { name: 'email', title: 'Email' },
     ];
 
+    const factory = new DefaultCollectionFactory();
+    return factory.create({providerOptions: {fetchOptions: dataOptions , fields: fields} , renderOptions: {}});
     return (
         <CollectionProvider fetchOptions={dataOptions} fields={fields}>
             <div>
