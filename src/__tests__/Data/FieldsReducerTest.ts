@@ -1,7 +1,7 @@
-import { FieldsActions, FieldsActionType } from "../../../Data/Fields/FieldsActions";
-import { fieldsReducer } from "../../../Data/Fields/FieldsReducer";
-import { Field } from "../../../Field/Field";
-import { buildState } from "../../../TestHelpers/Helpers";
+import { FieldsActions, FieldsActionType } from "../../Data/Fields/FieldsActions";
+import { fieldsReducer } from "../../Data/Fields/FieldsReducer";
+import { Field } from "../../Field/Field";
+import { buildState } from "../../TestHelpers/Helpers";
 
 describe('FieldsReducer', () => {
 
