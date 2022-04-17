@@ -1,6 +1,7 @@
 import { FetchActions } from './../../Data/Fetch/FetchAction';
 import { DispatchFunction } from 'wbox-context/dist/Context/DispatchContext';
 import { FetchService } from './FetchService';
+import { PaginationActions } from '../../Data/Pagination/PaginationActions';
 
 export abstract class FetchServiceBase implements FetchService {
     private readonly dispatch: DispatchFunction;
@@ -16,10 +17,10 @@ export abstract class FetchServiceBase implements FetchService {
     }
 
     async fetchNextPage(): Promise<void> {
-        await this.handleFetch(() => this.fetchNextPageData());
+        await this.handleFetch(() => this.fetchNextPageData() , () => this.dispatch(PaginationActions.nextPage()));
     }
 
-    async handleFetch(fetchCallback: () => Promise<DataResult>): Promise<void> {
+    async handleFetch(fetchCallback: () => Promise<DataResult> , onDone? : () => void): Promise<void> {
         this.shouldCancel = false;
         this.dispatch(FetchActions.setLoading(true));
         this.dispatch(FetchActions.setError(null));
@@ -32,6 +33,7 @@ export abstract class FetchServiceBase implements FetchService {
             this.dispatch(FetchActions.setTotalCount(data.totalCount));
             this.dispatch(FetchActions.setLoading(false));
             this.dispatch(FetchActions.setError(null));
+            onDone?.();
         } catch (e) {
             if (this.shouldCancel) {
                 return;

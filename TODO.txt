@@ -1,4 +1,3 @@
-- factory
 - load more (data cleanup) & paging
 - useCollectionData hook / withCollectionData HOC
 - code cleanup

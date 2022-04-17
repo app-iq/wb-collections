@@ -7,15 +7,11 @@ import { Table } from '../Factory/TableCollection';
 import { DefaultCollectionFactory } from '../Factory/DefaultCollectionFactory';
 
 export function Example() {
-    const [url, setUrl] = useState('http://localhost:8080/collection');
+    const [url, setUrl] = useState('http://localhost:8080/collection?page=0');
 
     const dataOptions: HttpFetchOptions = {
         url: url,
         buildDataResult: (res: any) => ({ items: res.data, totalCount: res.totalCount }),
-        nextPageOptions: (url, options, totalCount) => {
-            url = `http://localhost:8080/collection?page=${1}`;
-            return { url, options };
-        },
     };
     const fields: Field[] = [
         { name: 'id', title: '#' },

@@ -27,7 +27,7 @@ export class HttpFetchService extends FetchServiceBase {
         return this.sendRequest(true);
     }
 
-    private async sendRequest(fetchMore: boolean) {
+    private async sendRequest(isNextPage: boolean) {
         let url = this.getValueFromFunctionOrPermitiveType(this.options.url);
         const parseResponse = this.options.parseResponse ?? this.defaults.httpFetcher.parseResponse;
         const buildData = this.options.buildDataResult ?? this.defaults.httpFetcher.buildDataResult;
@@ -40,12 +40,12 @@ export class HttpFetchService extends FetchServiceBase {
             ...(this.options.fetchOptions ?? {}),
         };
 
-        if (fetchMore) {
+        if (isNextPage) {
             const nextPageOptions: NextPageOptionCallback =
                 this.options.nextPageOptions ?? this.defaults.httpFetcher.nextPageOptions;
-            const { url: fmUrl, options: fmOptions } = nextPageOptions(url , options, this.state.totalCount, this.state.allItems);
-            options = fmOptions;
-            url = fmUrl;
+            const { url: npUrl, options: npOptions } = nextPageOptions(url , options, this.state.totalCount, this.state.allItems , this.state.page , this.state.pageSize);
+            options = npOptions;
+            url = npUrl;
         }
 
         return fetch(url, options)
@@ -68,6 +68,8 @@ export type NextPageOptionCallback = (
     options: RequestInit,
     totalCount: number,
     items: unknown[],
+    page: number,
+    pageSize: number | undefined
 ) => { url: string; options: RequestInit };
 export interface HttpFetchOptions {
     url: FunctionOrPermitiveType<string>;

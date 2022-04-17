@@ -37,9 +37,13 @@ const defaults: CollectionsDefaults = {
             'Content-Type': 'application/json',
         },
         requestOptions: {},
-        nextPageOptions: () => {
-            // this default option is defined just in case there will be one callback that handle building "fetch more" options for many use case
-            throw Error('no default implementation for nextPageOptions');
+        nextPageOptions: (url, options , _totalCount , _items , page) => {
+            const urlObj = new URL(url);
+            urlObj.searchParams.set('page' , String(page+1));
+            return {
+                url: urlObj.toString(),
+                options: options
+            };
         },
     },
     renderOptions: {

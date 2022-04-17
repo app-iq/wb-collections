@@ -2,6 +2,8 @@ import React, { useCallback, useMemo } from 'react';
 import { Action, CoreProvider, DispatchFunction, Reducer } from 'wbox-context';
 import { fetchReducer as fetchReducer } from '../Data/Fetch/FetchReducer';
 import { fieldsReducer } from '../Data/Fields/FieldsReducer';
+import { modificationReducer } from '../Data/Modification/ModificationReducer';
+import { paginationReducer } from '../Data/Pagination/PaginationReducer';
 import { buildInitialState, State } from '../Data/State';
 import { RenderOptions } from '../Data/Types/Elements';
 import { useCollectionDefaults } from '../Defaults/Hooks';
@@ -20,16 +22,15 @@ export interface CollectionProviderProps {
     fields: Field[];
 }
 
-const baseReducers = [fetchReducer , fieldsReducer];
+const baseReducers = [fetchReducer , fieldsReducer , paginationReducer , modificationReducer];
 
 export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
     const fetcherType = props.fetchOptions.data !== undefined ? 'direct' : 'http';
     const reducers = useMemo(() => baseReducers.concat(props.reducers ?? []), [props.reducers]);
     const createServiceFactory = useCallback(
-        (dispatch, state) =>
-            props.serviceFactory
-                ? props.serviceFactory(dispatch, state as State)
-                : new DefaultServiceFactory(state as State, dispatch, defaults , props),
+        (dispatch, state) => props.serviceFactory
+        ? props.serviceFactory(dispatch, state as State)
+        : new DefaultServiceFactory(state as State, dispatch, defaults , props),
         [props.serviceFactory],
     );
     const defaults = useCollectionDefaults();
