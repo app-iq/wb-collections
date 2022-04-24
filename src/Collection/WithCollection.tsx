@@ -18,8 +18,8 @@ export function withCollection<T extends RenderOptions>(Component: React.Compone
         const displayCollectionOnEmpty =
             props.displayCollectionOnEmpty ?? defaults.renderOptions.displayCollectionOnEmpty;
         let collection: (() => ReactElement | null) | null = () => <Component {...props} data={state.allItems} />;
-        // TODO : maybe this could move into defaults (check logic)
-        if ((state.loading && state.allItems.length === 0) || state.error || (isEmpty && !displayCollectionOnEmpty)) {
+        const skipDisplayingCollection = (state.loading && state.allItems.length === 0) || state.error || (isEmpty && !displayCollectionOnEmpty);
+        if (skipDisplayingCollection) {
             collection = null;
         }
 

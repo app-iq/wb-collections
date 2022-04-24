@@ -1,7 +1,7 @@
-- code cleanup
 - testing
 - prepare for deployment
 - example
+- export file
 - docs
 
 Plugins:
@@ -10,10 +10,3 @@ Plugins:
 
 Next Version:
 - filtering & ordering [LATER]
-
-WORK ITEMS:
-
-- CLEANUP LOAD MORE
-- CLEANUP PAGING
-- code cleanup
-- tests
