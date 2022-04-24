@@ -2,14 +2,20 @@ import React from 'react';
 import { useState } from 'wbox-context';
 import { withCollection } from '../Collection/WithCollection';
 import { State } from '../Data/State';
+import { RenderOptions } from '../Data/Types/Elements';
 import { getFieldValue } from '../Field/Field';
+import { withCollectionData, WithCollectionDataProps } from '../HOCs/WithCollectionData';
 
-function _Table() {
+type Props = WithCollectionDataProps & RenderOptions;
+
+function _Table(props: Props) {
     const state: State = useState();
     const fields = state.fields;
-    const data = state.allItems;
+    const data = props.items;
+    const totalCount = props.totalCount;
     return (
         <>
+            <h1>Total Count: {totalCount}</h1>
             <table>
                 <thead>
                     <tr>
@@ -35,4 +41,4 @@ function _Table() {
     );
 };
 
-export const Table = withCollection(_Table);
+export const Table = withCollectionData(withCollection(_Table));
