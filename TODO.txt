@@ -1,6 +1,8 @@
-- withCollectionData HOC
 - code cleanup
 - testing
+- prepare for deployment
+- example
+- docs
 
 Plugins:
 - tailwindcss with factories & theme
