@@ -1,5 +1,4 @@
-- load more (data cleanup) & paging
-- useCollectionData hook / withCollectionData HOC
+- withCollectionData HOC
 - code cleanup
 - testing
 
