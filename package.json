@@ -1,7 +1,9 @@
 {
     "name": "wbox-collections",
     "version": "0.1.0",
-    "private": true,
+    "private": false,
+    "main": "dist/main.js",
+    "types": "dist/main.d.ts",  
     "dependencies": {},
     "scripts": {
         "start": "node ./src/__server/server.js & react-scripts start",
