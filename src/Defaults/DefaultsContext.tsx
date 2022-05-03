@@ -25,7 +25,7 @@ export interface CollectionsDefaults {
     };
 }
 
-const defaults: CollectionsDefaults = {
+export const defaults: CollectionsDefaults = {
     httpFetcher: {
         method: 'GET',
         parseResponse: (response: Response) => response.json(),

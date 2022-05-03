@@ -5,7 +5,7 @@
     "dependencies": {},
     "scripts": {
         "start": "node ./src/__server/server.js & react-scripts start",
-        "build": "react-scripts build",
+        "build": "tsc --noEmit false && rm -rf ./dist/__examples",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "lint": "eslint .",
