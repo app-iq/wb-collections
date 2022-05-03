@@ -1,6 +1,6 @@
 import { FetchService } from './Service/Fetch/FetchService';
 import { BasicFetchService, BasicFetchOptions } from './Service/Fetch/BasicFetchService';
-import { HttpFetchOptions } from './Service/Fetch/HttpFetchService';
+import { HttpFetchOptions, HttpFetchService } from './Service/Fetch/HttpFetchService';
 import { ServiceFactory, DefaultServiceFactory } from './Service/ServiceFactory';
 import { WithCollectionDataProps, withCollectionData } from './HOCs/WithCollectionData';
 import { Field } from './Field/Field';
@@ -9,15 +9,19 @@ import { DefaultFactoryConfiguration } from './Factory/DefaultFactoryConfigurati
 import { CollectionFactory } from './Factory/CollectionFactory';
 import { CollectionsDefaults, DefaultsContext, defaults } from './Defaults/DefaultsContext';
 import { useCollectionDefaults } from './Defaults/Hooks';
-import { RenderOptions } from './Data/Types/Elements';
-import { PaginationAction, PaginationActionType } from './Data/Pagination/PaginationActions';
-import { ModificationActionType, ModificationActions } from './Data/Modification/ModificationAction';
-import { FieldsAction, FieldsActionType } from './Data/Fields/FieldsActions';
+import { RenderOptions, Elements, Element } from './Data/Types/Elements';
+import { PaginationAction, PaginationActionType, PaginationActions } from './Data/Pagination/PaginationActions';
+import {
+    ModificationActionType,
+    ModificationActions,
+    ModificationAction,
+} from './Data/Modification/ModificationAction';
+import { FieldsAction, FieldsActionType, FieldsActions } from './Data/Fields/FieldsActions';
 import { FetchAction, FetchActionType, FetchActions } from './Data/Fetch/FetchAction';
 import { CollectionProvider, CollectionProviderProps } from './CollectionProvider/CollectionProvider';
 import { withCollection, WithCollectionProps } from './Collection/WithCollection';
 import { InfiniteScroll } from './Collection/InfiniteScroll';
-import { useCollectionData } from './Hooks';
+import { useCollectionData } from './Hooks/UseCollectionData';
 
 export type {
     WithCollectionProps,
@@ -41,7 +45,7 @@ export type {
     ServiceFactory,
     HttpFetchOptions,
     BasicFetchOptions,
-    FetchService
+    FetchService,
 };
 
 export {
@@ -60,6 +64,5 @@ export {
     useCollectionData,
     DefaultServiceFactory,
     HttpFetchService,
-    BasicFetchService
+    BasicFetchService,
 };
-
