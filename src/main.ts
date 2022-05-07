@@ -1,3 +1,4 @@
+import { State } from './Data/State';
 import { FetchService } from './Service/Fetch/FetchService';
 import { BasicFetchService, BasicFetchOptions } from './Service/Fetch/BasicFetchService';
 import { HttpFetchOptions, HttpFetchService } from './Service/Fetch/HttpFetchService';
@@ -46,6 +47,7 @@ export type {
     HttpFetchOptions,
     BasicFetchOptions,
     FetchService,
+    State
 };
 
 export {
