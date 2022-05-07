@@ -12,6 +12,7 @@ import { CollectionsDefaults, DefaultsContext, defaults } from './Defaults/Defau
 import { useCollectionDefaults } from './Defaults/Hooks';
 import { RenderOptions, Elements, Element } from './Data/Types/Elements';
 import { PaginationAction, PaginationActionType, PaginationActions } from './Data/Pagination/PaginationActions';
+import { transformFieldValue, getFieldValue } from './Field/Field';
 import {
     ModificationActionType,
     ModificationActions,
@@ -47,7 +48,7 @@ export type {
     HttpFetchOptions,
     BasicFetchOptions,
     FetchService,
-    State
+    State,
 };
 
 export {
@@ -67,4 +68,6 @@ export {
     DefaultServiceFactory,
     HttpFetchService,
     BasicFetchService,
+    getFieldValue,
+    transformFieldValue,
 };
