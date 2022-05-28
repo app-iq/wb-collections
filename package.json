@@ -1,6 +1,6 @@
 {
     "name": "wbox-collections",
-    "version": "0.1.4",
+    "version": "0.1.6",
     "private": false,
     "main": "dist/main.js",
     "types": "dist/main.d.ts",

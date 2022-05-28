@@ -1,7 +1,7 @@
-import { FetchActions } from './../../Data/Fetch/FetchAction';
-import { DispatchFunction } from 'wbox-context/dist/Context/DispatchContext';
-import { FetchService } from './FetchService';
-import { PaginationActions } from '../../Data/Pagination/PaginationActions';
+import {FetchActions} from '../../Data/Fetch/FetchAction';
+import {DispatchFunction} from 'wbox-context/dist/Context/DispatchContext';
+import {FetchService} from './FetchService';
+import {PaginationActions} from '../../Data/Pagination/PaginationActions';
 
 export abstract class FetchServiceBase implements FetchService {
     private readonly dispatch: DispatchFunction;
@@ -17,10 +17,14 @@ export abstract class FetchServiceBase implements FetchService {
     }
 
     async fetchNextPage(): Promise<void> {
-        await this.handleFetch(() => this.fetchNextPageData() , () => this.dispatch(PaginationActions.nextPage()));
+        await this.handleFetch(() => this.fetchNextPageData(), () => this.dispatch(PaginationActions.nextPage()));
     }
 
-    async handleFetch(fetchCallback: () => Promise<DataResult> , onDone? : () => void): Promise<void> {
+    async fetchPage(page: number): Promise<void> {
+        await this.handleFetch(() => this.fetchPageData(page), () => this.dispatch(PaginationActions.setPage(page)));
+    }
+
+    async handleFetch(fetchCallback: () => Promise<DataResult>, onDone?: () => void): Promise<void> {
         this.shouldCancel = false;
         this.dispatch(FetchActions.setLoading(true));
         this.dispatch(FetchActions.setError(null));
@@ -50,7 +54,10 @@ export abstract class FetchServiceBase implements FetchService {
     }
 
     protected abstract fetchData(): Promise<DataResult>;
+
     protected abstract fetchNextPageData(): Promise<DataResult>;
+
+    protected abstract fetchPageData(page: number): Promise<DataResult>;
 }
 
 export interface DataResult {

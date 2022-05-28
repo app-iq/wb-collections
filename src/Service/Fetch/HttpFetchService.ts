@@ -1,7 +1,7 @@
-import { State } from './../../Data/State';
-import { CollectionsDefaults } from './../../Defaults/DefaultsContext';
-import { DispatchFunction } from 'wbox-context';
-import { FetchServiceBase, DataResult } from './FetchServiceBase';
+import {State} from '../../Data/State';
+import {CollectionsDefaults} from '../../Defaults/DefaultsContext';
+import {DispatchFunction} from 'wbox-context';
+import {FetchServiceBase, DataResult} from './FetchServiceBase';
 
 export class HttpFetchService extends FetchServiceBase {
     private readonly options: HttpFetchOptions;
@@ -20,14 +20,18 @@ export class HttpFetchService extends FetchServiceBase {
         if (customFetch) {
             return customFetch();
         }
-        return this.sendRequest(false);
+        return this.sendRequest();
     }
 
     protected fetchNextPageData(): Promise<DataResult> {
-        return this.sendRequest(true);
+        return this.sendRequest({isNextPage: true});
     }
 
-    private async sendRequest(isNextPage: boolean) {
+    protected fetchPageData(page: number): Promise<DataResult> {
+        return this.sendRequest({page: page});
+    }
+
+    private async sendRequest(pageOptions: { isNextPage?: boolean, page?: number } = {}) {
         let url = this.getValueFromFunctionOrPermitiveType(this.options.url);
         const parseResponse = this.options.parseResponse ?? this.defaults.httpFetcher.parseResponse;
         const buildData = this.options.buildDataResult ?? this.defaults.httpFetcher.buildDataResult;
@@ -40,10 +44,14 @@ export class HttpFetchService extends FetchServiceBase {
             ...(this.options.fetchOptions ?? {}),
         };
 
-        if (isNextPage) {
+        if (pageOptions.isNextPage || pageOptions.page) {
+            const page = pageOptions.isNextPage ? this.state.page : Number(pageOptions.page);
             const nextPageOptions: NextPageOptionCallback =
                 this.options.nextPageOptions ?? this.defaults.httpFetcher.nextPageOptions;
-            const { url: npUrl, options: npOptions } = nextPageOptions(url , options, this.state.totalCount, this.state.allItems , this.state.page , this.state.pageSize);
+            const {
+                url: npUrl,
+                options: npOptions
+            } = nextPageOptions(url, options, this.state.totalCount, this.state.allItems, page, this.state.pageSize);
             options = npOptions;
             url = npUrl;
         }
@@ -71,6 +79,7 @@ export type NextPageOptionCallback = (
     page: number,
     pageSize: number | undefined
 ) => { url: string; options: RequestInit };
+
 export interface HttpFetchOptions {
     url: FunctionOrPermitiveType<string>;
     method?: string;
