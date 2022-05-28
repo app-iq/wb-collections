@@ -24,6 +24,7 @@ import { CollectionProvider, CollectionProviderProps } from './CollectionProvide
 import { withCollection, WithCollectionProps } from './Collection/WithCollection';
 import { InfiniteScroll } from './Collection/InfiniteScroll';
 import { useCollectionData } from './Hooks/UseCollectionData';
+import { usePagingData, PagingData } from "./Hooks/UsePagingData";
 
 export type {
     WithCollectionProps,
@@ -49,6 +50,7 @@ export type {
     BasicFetchOptions,
     FetchService,
     State,
+    PagingData
 };
 
 export {
@@ -70,4 +72,5 @@ export {
     BasicFetchService,
     getFieldValue,
     transformFieldValue,
+    usePagingData
 };
