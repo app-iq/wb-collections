@@ -45,13 +45,13 @@ export class HttpFetchService extends FetchServiceBase {
         };
 
         if (pageOptions.isNextPage || pageOptions.page) {
-            const page = pageOptions.isNextPage ? this.state.page : Number(pageOptions.page);
-            const nextPageOptions: NextPageOptionCallback =
-                this.options.nextPageOptions ?? this.defaults.httpFetcher.nextPageOptions;
+            const page = pageOptions.isNextPage ? this.state.page + 1 : Number(pageOptions.page);
+            const fetchPageOptions: FetchPageOptionCallback =
+                this.options.fetchPageOptions ?? this.defaults.httpFetcher.fetchPageOptions;
             const {
                 url: npUrl,
                 options: npOptions
-            } = nextPageOptions(url, options, this.state.totalCount, this.state.allItems, page, this.state.pageSize);
+            } = fetchPageOptions(url, options, this.state.totalCount, this.state.allItems, page, this.state.pageSize);
             options = npOptions;
             url = npUrl;
         }
@@ -71,7 +71,7 @@ export class HttpFetchService extends FetchServiceBase {
 }
 
 type FunctionOrPermitiveType<T> = ((totalCount: number, data: unknown[]) => T) | T;
-export type NextPageOptionCallback = (
+export type FetchPageOptionCallback = (
     url: string,
     options: RequestInit,
     totalCount: number,
@@ -88,7 +88,7 @@ export interface HttpFetchOptions {
     fetchOptions?: RequestInit;
     parseResponse?: (response: Response) => Promise<unknown>;
     buildDataResult?: (parsedResponse: unknown) => DataResult;
-    nextPageOptions?: NextPageOptionCallback;
+    fetchPageOptions?: FetchPageOptionCallback;
     fetch?: () => Promise<DataResult>;
     data?: never;
 }

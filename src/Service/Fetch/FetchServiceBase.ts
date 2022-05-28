@@ -21,6 +21,7 @@ export abstract class FetchServiceBase implements FetchService {
     }
 
     async fetchPage(page: number): Promise<void> {
+        this.dispatch(FetchActions.setData([]));
         await this.handleFetch(() => this.fetchPageData(page), () => this.dispatch(PaginationActions.setPage(page)));
     }
 

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Elements } from '../Data/Types/Elements';
-import { NextPageOptionCallback } from '../Service/Fetch/HttpFetchService';
+import { FetchPageOptionCallback } from '../Service/Fetch/HttpFetchService';
 import { DataResult } from './../Service/Fetch/FetchServiceBase';
 
 const defaultOrderElements = (elements: Elements) => {
@@ -13,7 +13,7 @@ export interface CollectionsDefaults {
         buildDataResult: (parsedResponse: unknown) => DataResult;
         headers: HeadersInit;
         requestOptions: Partial<RequestInit>;
-        nextPageOptions: NextPageOptionCallback;
+        fetchPageOptions: FetchPageOptionCallback;
     };
     renderOptions: {
         renderLoading: () => ReactElement | null;
@@ -37,9 +37,9 @@ export const defaults: CollectionsDefaults = {
             'Content-Type': 'application/json',
         },
         requestOptions: {},
-        nextPageOptions: (url, options , _totalCount , _items , page) => {
+        fetchPageOptions: (url, options , _totalCount , _items , page) => {
             const urlObj = new URL(url);
-            urlObj.searchParams.set('page' , String(page+1));
+            urlObj.searchParams.set('page' , String(page));
             return {
                 url: urlObj.toString(),
                 options: options
