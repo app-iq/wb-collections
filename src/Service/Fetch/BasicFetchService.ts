@@ -21,6 +21,10 @@ export class BasicFetchService extends FetchServiceBase {
     protected fetchNextPageData(): Promise<DataResult> {
         throw Error("BasicFetchService doesn't support pagination");
     }
+
+    protected fetchPageData(page: number): Promise<DataResult> {
+        throw Error("BasicFetchService doesn't support pagination");
+    }
 }
 
 export interface BasicFetchOptions {
