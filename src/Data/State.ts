@@ -1,5 +1,5 @@
-import { HttpFetchOptions } from './../Service/Fetch/HttpFetchService';
-import { Field } from './../Field/Field';
+import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
+import { Field } from '../Field/Field';
 import { BasicFetchOptions } from '../Service/Fetch/BasicFetchService';
 
 export type FetchOptions = HttpFetchOptions | BasicFetchOptions;

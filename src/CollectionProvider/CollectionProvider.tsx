@@ -20,6 +20,7 @@ export interface CollectionProviderProps {
     fetchOptions: BasicFetchOptions | HttpFetchOptions;
     renderOptions?: RenderOptions;
     fields: Field[];
+    pageSize?: number;
 }
 
 const baseReducers = [fetchReducer , fieldsReducer , paginationReducer , modificationReducer];
@@ -35,8 +36,8 @@ export const CollectionProvider: React.FC<CollectionProviderProps> = props => {
     );
     const defaults = useCollectionDefaults();
     const initialState = useMemo(
-        () => buildInitialState(),
-        [],
+        () => buildInitialState({pageSize: props.pageSize}),
+        [props.pageSize],
     );
     return (
         <CoreProvider reducers={reducers} createServiceFactory={createServiceFactory} initialState={initialState}>
