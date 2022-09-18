@@ -1,6 +1,7 @@
-import { Reducer } from 'wbox-context';
-import { State } from '../State';
-import { PaginationAction, PaginationActionType } from './PaginationActions';
+import {Reducer} from 'wb-core-provider';
+import {State} from '../State';
+import {PaginationAction, PaginationActionType} from './PaginationActions';
+
 export const paginationReducer: Reducer<State, PaginationAction<unknown>> = (state, action) => {
     switch (action.type) {
         case PaginationActionType.RESET_PAGE:

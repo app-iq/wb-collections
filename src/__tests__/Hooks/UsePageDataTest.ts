@@ -1,15 +1,13 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import {useCollectionData} from "../../Hooks/UseCollectionData";
-import {buildState} from "../../TestHelpers/Helpers";
+import {buildState} from '../../TestHelpers/Helpers';
+import {useState} from 'wb-core-provider';
+import {PagingData, usePagingData} from '../../Hooks/UsePagingData';
+import Mock = jest.Mock;
 
-jest.mock('wbox-context', () => {
+jest.mock('wb-core-provider', () => {
     return {
         useState: jest.fn(),
     };
 });
-
-import {useState} from "wbox-context";
-import {PagingData, usePagingData} from "../../Hooks/UsePagingData";
 
 
 function buildItems(size: number) {
@@ -21,8 +19,8 @@ describe('useCollectionData', () => {
     it('it should return data when page count is one', () => {
         const state = buildState({page: 0, pageSize: 9, allItems: buildItems(8), totalCount: 8});
 
-        // @ts-ignore
-        useState.mockReturnValue(state);
+
+        (useState as Mock).mockReturnValue(state);
 
         const data = usePagingData();
         const expected: PagingData = {
@@ -34,15 +32,14 @@ describe('useCollectionData', () => {
             lastPage: 0,
             firstPage: 0,
             currentPage: 0
-        }
+        };
         expect(data).toEqual(expected);
     });
 
     it('it should return data when page count is two', () => {
         const state = buildState({page: 0, pageSize: 9, allItems: buildItems(17), totalCount: 17});
 
-        // @ts-ignore
-        useState.mockReturnValue(state);
+        (useState as Mock).mockReturnValue(state);
 
         const data = usePagingData();
         const expected: PagingData = {
@@ -54,15 +51,14 @@ describe('useCollectionData', () => {
             lastPage: 1,
             firstPage: 0,
             currentPage: 0
-        }
+        };
         expect(data).toEqual(expected);
     });
 
     it('it should return data when page count is five', () => {
         const state = buildState({page: 2, pageSize: 3, allItems: buildItems(15), totalCount: 15});
 
-        // @ts-ignore
-        useState.mockReturnValue(state);
+        (useState as Mock).mockReturnValue(state);
 
         const data = usePagingData();
         const expected: PagingData = {
@@ -74,15 +70,14 @@ describe('useCollectionData', () => {
             lastPage: 4,
             firstPage: 0,
             currentPage: 2
-        }
+        };
         expect(data).toEqual(expected);
     });
 
     it('it should return data when current page is the last page', () => {
         const state = buildState({page: 4, pageSize: 3, allItems: buildItems(15), totalCount: 15});
 
-        // @ts-ignore
-        useState.mockReturnValue(state);
+        (useState as Mock).mockReturnValue(state);
 
         const data = usePagingData();
         const expected: PagingData = {
@@ -94,15 +89,14 @@ describe('useCollectionData', () => {
             lastPage: 4,
             firstPage: 0,
             currentPage: 4
-        }
+        };
         expect(data).toEqual(expected);
     });
 
     it('it should return data when current page is the first page', () => {
         const state = buildState({page: 0, pageSize: 3, allItems: buildItems(15), totalCount: 15});
 
-        // @ts-ignore
-        useState.mockReturnValue(state);
+        (useState as Mock).mockReturnValue(state);
 
         const data = usePagingData();
         const expected: PagingData = {
@@ -114,15 +108,14 @@ describe('useCollectionData', () => {
             lastPage: 4,
             firstPage: 0,
             currentPage: 0
-        }
+        };
         expect(data).toEqual(expected);
     });
 
     it('it should return data when page size is not set', () => {
         const state = buildState({page: 0, pageSize: undefined, allItems: buildItems(15), totalCount: 15});
 
-        // @ts-ignore
-        useState.mockReturnValue(state);
+        (useState as Mock).mockReturnValue(state);
 
         const data = usePagingData();
         const expected: PagingData = {
@@ -134,7 +127,7 @@ describe('useCollectionData', () => {
             lastPage: 0,
             firstPage: 0,
             currentPage: 0
-        }
+        };
         expect(data).toEqual(expected);
     });
 

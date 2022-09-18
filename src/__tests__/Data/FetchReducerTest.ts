@@ -1,6 +1,6 @@
-import { FetchActions } from "../../Data/Fetch/FetchAction"
-import { fetchReducer } from "../../Data/Fetch/FetchReducer";
-import { INITIAL_STATE, State } from "../../Data/State";
+import {FetchActions} from '../../Data/Fetch/FetchAction';
+import {fetchReducer} from '../../Data/Fetch/FetchReducer';
+import {INITIAL_STATE, State} from '../../Data/State';
 
 describe('Fetch Reducer', () => {
 
@@ -37,14 +37,14 @@ describe('Fetch Reducer', () => {
         const state = buildState({ allItems: [{}] });
         const action = FetchActions.appendData([{}]);
         const newState = fetchReducer(state, action);
-        expect(newState).toEqual(buildState({ allItems: [{}, {}] }));
+        expect(newState).toEqual(buildState({allItems: [{}, {}]}));
     });
 
     it('should handle set total count action', () => {
-        const state = buildState({ totalCount: 20 });
+        const state = buildState({totalCount: 20});
         const action = FetchActions.setTotalCount(100);
         const newState = fetchReducer(state, action);
-        expect(newState).toEqual(buildState({ totalCount: 100 }));
+        expect(newState).toEqual(buildState({totalCount: 100}));
     });
 
-})
+});

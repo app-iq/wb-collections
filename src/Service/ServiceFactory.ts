@@ -1,10 +1,11 @@
-import { CollectionsDefaults } from './../Defaults/DefaultsContext';
-import { BasicFetchService, BasicFetchOptions } from './Fetch/BasicFetchService';
-import { HttpFetchService, HttpFetchOptions } from './Fetch/HttpFetchService';
-import { DispatchFunction } from 'wbox-context/dist/Context/DispatchContext';
-import { State } from './../Data/State';
-import { FetchService } from './Fetch/FetchService';
-import { CollectionProviderProps } from '../CollectionProvider/CollectionProvider';
+import {CollectionsDefaults} from './../Defaults/DefaultsContext';
+import {BasicFetchOptions, BasicFetchService} from './Fetch/BasicFetchService';
+import {HttpFetchOptions, HttpFetchService} from './Fetch/HttpFetchService';
+import {DispatchFunction} from 'wb-core-provider';
+import {State} from './../Data/State';
+import {FetchService} from './Fetch/FetchService';
+import {CollectionProviderProps} from '../CollectionProvider/CollectionProvider';
+
 export interface ServiceFactory {
     createHttpFetchService(): FetchService;
     createBasicFetchService(): FetchService;

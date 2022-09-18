@@ -1,7 +1,7 @@
 import {State} from '../../Data/State';
 import {CollectionsDefaults} from '../../Defaults/DefaultsContext';
-import {DispatchFunction} from 'wbox-context';
-import {FetchServiceBase, DataResult} from './FetchServiceBase';
+import {DispatchFunction} from 'wb-core-provider';
+import {DataResult, FetchServiceBase} from './FetchServiceBase';
 
 export class HttpFetchService extends FetchServiceBase {
     private readonly options: HttpFetchOptions;

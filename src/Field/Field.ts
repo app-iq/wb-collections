@@ -1,16 +1,16 @@
-import { ReactElement } from 'react';
+import {ReactElement} from 'react';
 
-type TransformFunc = (value: any, field: Field, record: unknown, index?: number) => any;
+type TransformFunc = (value: unknown, field: Field, record: unknown, index?: number) => unknown;
 
 export interface Field {
     name: string;
     title: string;
-    renderTitle?: (value: any, field: Field) => ReactElement | null;
-    renderValue?: (value: any, field: Field, record: unknown, index?: number) => ReactElement | null;
+    renderTitle?: (value: unknown, field: Field) => ReactElement | null;
+    renderValue?: (value: unknown, field: Field, record: unknown, index?: number) => ReactElement | null;
     transform?: TransformFunc | TransformFunc[];
 }
 
-export function transformFieldValue(value: any, field: Field, record: unknown): any {
+export function transformFieldValue(value: unknown, field: Field, record: unknown): unknown {
     if (!field.transform) {
         return value;
     }
@@ -20,6 +20,6 @@ export function transformFieldValue(value: any, field: Field, record: unknown): 
     return field.transform(value, field, record);
 }
 
-export function getFieldValue(field: Field, record: unknown): any {
-    return transformFieldValue((record as any)[field.name], field, record);
+export function getFieldValue(field: Field, record: Record<string, unknown>): unknown {
+    return transformFieldValue(record[field.name], field, record);
 }

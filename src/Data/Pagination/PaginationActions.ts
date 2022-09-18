@@ -1,4 +1,4 @@
-import { Action } from 'wbox-context';
+import {Action} from 'wb-core-provider';
 
 export enum PaginationActionType {
     RESET_PAGE = 'FETCH_ACTION@RESET_PAGE',
@@ -44,20 +44,20 @@ export class PaginationActions {
         return {
             type: PaginationActionType.SET_START_FROM,
             payload: start
-        }
+        };
     }
 
     public static setPageSize(pageSize: number): PaginationAction<number> {
         return {
             type: PaginationActionType.SET_PAGE_SIZE,
             payload: pageSize
-        }
+        };
     }
 
     public static setNotLimitedPageSize(): PaginationAction<undefined> {
         return {
             type: PaginationActionType.SET_PAGE_SIZE,
             payload: undefined
-        }
+        };
     }
 }

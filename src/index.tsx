@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Example } from './__examples/Example';
+import {Example} from './__examples__/Example';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Example />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Example/>
+    </React.StrictMode>,
+    document.getElementById('root')
 );

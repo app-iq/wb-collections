@@ -1,5 +1,5 @@
-import { DispatchFunction } from 'wbox-context';
-import { DataResult, FetchServiceBase } from './FetchServiceBase';
+import {DispatchFunction} from 'wb-core-provider';
+import {DataResult, FetchServiceBase} from './FetchServiceBase';
 
 export class BasicFetchService extends FetchServiceBase {
     private readonly options: BasicFetchOptions;
@@ -19,11 +19,11 @@ export class BasicFetchService extends FetchServiceBase {
     }
 
     protected fetchNextPageData(): Promise<DataResult> {
-        throw Error("BasicFetchService doesn't support pagination");
+        throw Error('BasicFetchService doesn\'t support pagination');
     }
 
     protected fetchPageData(): Promise<DataResult> {
-        throw Error("BasicFetchService doesn't support pagination");
+        throw Error('BasicFetchService doesn\'t support pagination');
     }
 }
 

@@ -1,16 +1,15 @@
-import { useEffect, useRef } from 'react';
-import React from 'react';
-import { State } from '../Data/State';
-import { useServiceFactory, useState } from 'wbox-context';
-import { ServiceFactory } from '../Service/ServiceFactory';
-import { useCollectionDefaults } from '../Defaults/Hooks';
+import React, {PropsWithChildren, useEffect, useRef} from 'react';
+import {State} from '../Data/State';
+import {useServiceFactory, useState} from 'wb-core-provider';
+import {ServiceFactory} from '../Service/ServiceFactory';
+import {useCollectionDefaults} from '../Defaults/Hooks';
 
 interface Props {
     scrollTarget?: 'document' | 'wrapper';
     threshold?: number;
 }
 
-export const InfiniteScroll: React.FC<Props> = props => {
+export const InfiniteScroll: React.FC<PropsWithChildren<Props>> = props => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const ref = useRef<any>();
     const defaults = useCollectionDefaults();

@@ -1,5 +1,5 @@
-import {useState} from "wbox-context";
-import {State} from "../Data/State";
+import {useState} from 'wb-core-provider';
+import {State} from '../Data/State';
 
 export interface PagingData {
     currentPage: number;

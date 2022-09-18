@@ -1,4 +1,4 @@
-import { Action } from 'wbox-context';
+import {Action} from 'wb-core-provider';
 
 export enum ModificationActionType {
     INSERT = 'ModificationAction@INSERT',

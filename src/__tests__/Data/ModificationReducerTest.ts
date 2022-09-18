@@ -1,15 +1,15 @@
-import { ModificationActions } from "../../Data/Modification/ModificationAction";
-import { modificationReducer } from "../../Data/Modification/ModificationReducer";
-import { buildState } from "../../TestHelpers/Helpers";
+import {ModificationActions} from '../../Data/Modification/ModificationAction';
+import {modificationReducer} from '../../Data/Modification/ModificationReducer';
+import {buildState} from '../../TestHelpers/Helpers';
 
 describe('Modification Reducer', () => {
 
     it('should insert first', () => {
-        const items = [{ value: 'test_1' }];
+        const items = [{value: 'test_1'}];
         const state = buildState({
             allItems: items,
         });
-        const action = ModificationActions.insertFirst({ value: 'test_2' });
+        const action = ModificationActions.insertFirst({value: 'test_2'});
         const newState = modificationReducer(state, action);
         expect(newState).toEqual(buildState({
             allItems: [{ value: 'test_2' }, ...items]

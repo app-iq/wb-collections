@@ -1,11 +1,11 @@
-import { PaginationActions } from "../../Data/Pagination/PaginationActions";
-import { paginationReducer } from "../../Data/Pagination/PaginationReducer";
-import { buildState } from "../../TestHelpers/Helpers"
+import {PaginationActions} from '../../Data/Pagination/PaginationActions';
+import {paginationReducer} from '../../Data/Pagination/PaginationReducer';
+import {buildState} from '../../TestHelpers/Helpers';
 
 describe('Pagination Reducer', () => {
 
     it('should handle reset action', () => {
-        const state = buildState({ page: 10 });
+        const state = buildState({page: 10});
         const action = PaginationActions.resetPage();
         const newState = paginationReducer(state, action);
         expect(newState).toEqual(buildState({
@@ -51,7 +51,7 @@ describe('Pagination Reducer', () => {
     });
 
     it('should handle set page size action', () => {
-        const state = buildState({ pageSize: 50 });
+        const state = buildState({pageSize: 50});
         const action = PaginationActions.setPageSize(100);
         const newState = paginationReducer(state, action);
         expect(newState).toEqual(buildState({
@@ -59,4 +59,4 @@ describe('Pagination Reducer', () => {
         }));
     });
 
-})
+});

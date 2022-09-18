@@ -1,9 +1,9 @@
-import React, { Fragment, ReactElement } from 'react';
-import { useState } from 'wbox-context';
-import { State } from '../Data/State';
-import { Elements, RenderOptions } from '../Data/Types/Elements';
-import { CollectionsDefaults } from '../Defaults/DefaultsContext';
-import { useCollectionDefaults } from '../Defaults/Hooks';
+import React, {Fragment, ReactElement} from 'react';
+import {useState} from 'wb-core-provider';
+import {State} from '../Data/State';
+import {Elements, RenderOptions} from '../Data/Types/Elements';
+import {CollectionsDefaults} from '../Defaults/DefaultsContext';
+import {useCollectionDefaults} from '../Defaults/Hooks';
 
 export interface WithCollectionProps {
     data: unknown[];
@@ -38,7 +38,7 @@ export function withCollection<T extends RenderOptions>(Component: React.Compone
             </React.Fragment>
         );
     };
-};
+}
 
 function buildElements(
     state: State,

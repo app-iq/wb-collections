@@ -1,5 +1,5 @@
-import { Action } from 'wbox-context';
-import { Field } from '../../Field/Field';
+import {Action} from 'wb-core-provider';
+import {Field} from '../../Field/Field';
 
 export enum FieldsActionType {
     SET = 'FIELDS_ACTION@SET',
@@ -21,7 +21,7 @@ export class FieldsActions {
         return {
             type: FieldsActionType.TOGGLE_VISIBILITY,
             payload: fieldName
-        }
+        };
     }
 
     public static move(fieldName: string, position: number): FieldsAction<MoveFieldPayload> {
@@ -31,7 +31,7 @@ export class FieldsActions {
                 position: position,
                 fieldName: fieldName
             }
-        }
+        };
     }
 }
 

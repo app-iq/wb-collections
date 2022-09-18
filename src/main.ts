@@ -1,30 +1,25 @@
-import { State } from './Data/State';
-import { FetchService } from './Service/Fetch/FetchService';
-import { BasicFetchService, BasicFetchOptions } from './Service/Fetch/BasicFetchService';
-import { HttpFetchOptions, HttpFetchService } from './Service/Fetch/HttpFetchService';
-import { ServiceFactory, DefaultServiceFactory } from './Service/ServiceFactory';
-import { WithCollectionDataProps, withCollectionData } from './HOCs/WithCollectionData';
-import { Field } from './Field/Field';
-import { DefaultCollectionFactory } from './Factory/DefaultCollectionFactory';
-import { DefaultFactoryConfiguration } from './Factory/DefaultFactoryConfiguration';
-import { CollectionFactory } from './Factory/CollectionFactory';
-import { CollectionsDefaults, DefaultsContext, defaults } from './Defaults/DefaultsContext';
-import { useCollectionDefaults } from './Defaults/Hooks';
-import { RenderOptions, Elements, Element } from './Data/Types/Elements';
-import { PaginationAction, PaginationActionType, PaginationActions } from './Data/Pagination/PaginationActions';
-import { transformFieldValue, getFieldValue } from './Field/Field';
-import {
-    ModificationActionType,
-    ModificationActions,
-    ModificationAction,
-} from './Data/Modification/ModificationAction';
-import { FieldsAction, FieldsActionType, FieldsActions } from './Data/Fields/FieldsActions';
-import { FetchAction, FetchActionType, FetchActions } from './Data/Fetch/FetchAction';
-import { CollectionProvider, CollectionProviderProps } from './CollectionProvider/CollectionProvider';
-import { withCollection, WithCollectionProps } from './Collection/WithCollection';
-import { InfiniteScroll } from './Collection/InfiniteScroll';
-import { useCollectionData } from './Hooks/UseCollectionData';
-import { usePagingData, PagingData } from "./Hooks/UsePagingData";
+import {State} from './Data/State';
+import {FetchService} from './Service/Fetch/FetchService';
+import {BasicFetchOptions, BasicFetchService} from './Service/Fetch/BasicFetchService';
+import {HttpFetchOptions, HttpFetchService} from './Service/Fetch/HttpFetchService';
+import {DefaultServiceFactory, ServiceFactory} from './Service/ServiceFactory';
+import {withCollectionData, WithCollectionDataProps} from './HOCs/WithCollectionData';
+import {Field, getFieldValue, transformFieldValue} from './Field/Field';
+import {DefaultCollectionFactory} from './Factory/DefaultCollectionFactory';
+import {DefaultFactoryConfiguration} from './Factory/DefaultFactoryConfiguration';
+import {CollectionFactory} from './Factory/CollectionFactory';
+import {CollectionsDefaults, defaults, DefaultsContext} from './Defaults/DefaultsContext';
+import {useCollectionDefaults} from './Defaults/Hooks';
+import {Element, Elements, RenderOptions} from './Data/Types/Elements';
+import {PaginationAction, PaginationActions, PaginationActionType} from './Data/Pagination/PaginationActions';
+import {ModificationAction, ModificationActions, ModificationActionType,} from './Data/Modification/ModificationAction';
+import {FieldsAction, FieldsActions, FieldsActionType} from './Data/Fields/FieldsActions';
+import {FetchAction, FetchActions, FetchActionType} from './Data/Fetch/FetchAction';
+import {CollectionProvider, CollectionProviderProps} from './CollectionProvider/CollectionProvider';
+import {withCollection, WithCollectionProps} from './Collection/WithCollection';
+import {InfiniteScroll} from './Collection/InfiniteScroll';
+import {useCollectionData} from './Hooks/UseCollectionData';
+import {PagingData, usePagingData} from './Hooks/UsePagingData';
 
 export type {
     WithCollectionProps,

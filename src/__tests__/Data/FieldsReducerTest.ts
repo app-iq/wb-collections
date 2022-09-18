@@ -1,12 +1,12 @@
-import { FieldsActions, FieldsActionType } from "../../Data/Fields/FieldsActions";
-import { fieldsReducer } from "../../Data/Fields/FieldsReducer";
-import { Field } from "../../Field/Field";
-import { buildState } from "../../TestHelpers/Helpers";
+import {FieldsActions} from '../../Data/Fields/FieldsActions';
+import {fieldsReducer} from '../../Data/Fields/FieldsReducer';
+import {Field} from '../../Field/Field';
+import {buildState} from '../../TestHelpers/Helpers';
 
 describe('FieldsReducer', () => {
 
-    it("should handle set fields action", () => {
-        const fields: Field[] = [{ name: 'test1', title: 'Test 1' }, { name: 'test2', title: 'Test 2' }];
+    it('should handle set fields action', () => {
+        const fields: Field[] = [{name: 'test1', title: 'Test 1'}, {name: 'test2', title: 'Test 2'}];
         const state = buildState({});
         const action = FieldsActions.set(fields);
         const newState = fieldsReducer(state, action);
@@ -17,8 +17,8 @@ describe('FieldsReducer', () => {
     });
 
 
-    it("should handle toggle visibility action / remove field", () => {
-        const fields: Field[] = [{ name: 'test1', title: 'Test 1' }, { name: 'test2', title: 'Test 2' }];
+    it('should handle toggle visibility action / remove field', () => {
+        const fields: Field[] = [{name: 'test1', title: 'Test 1'}, {name: 'test2', title: 'Test 2'}];
         const state = buildState({
             fields: fields,
             visibleFields: ['test1', 'test2']
@@ -31,8 +31,8 @@ describe('FieldsReducer', () => {
         }));
     });
 
-    it("should handle toggle visibility action / add field", () => {
-        const fields: Field[] = [{ name: 'test1', title: 'Test 1' }, { name: 'test2', title: 'Test 2' }];
+    it('should handle toggle visibility action / add field', () => {
+        const fields: Field[] = [{name: 'test1', title: 'Test 1'}, {name: 'test2', title: 'Test 2'}];
         const state = buildState({
             fields: fields,
             visibleFields: ['test2']
@@ -45,12 +45,12 @@ describe('FieldsReducer', () => {
         }));
     });
 
-    it("should handle move action / move back", () => {
+    it('should handle move action / move back', () => {
         const fields: Field[] = [
-            { name: 'test1', title: 'Test 1' },
-            { name: 'test2', title: 'Test 2' },
-            { name: 'test3', title: 'Test 3' },
-            { name: 'test4', title: 'Test 4' }
+            {name: 'test1', title: 'Test 1'},
+            {name: 'test2', title: 'Test 2'},
+            {name: 'test3', title: 'Test 3'},
+            {name: 'test4', title: 'Test 4'}
         ];
         const state = buildState({
             fields: fields
@@ -70,12 +70,12 @@ describe('FieldsReducer', () => {
         }));
     });
 
-    it("should handle move action / move foreword", () => {
+    it('should handle move action / move foreword', () => {
         const fields: Field[] = [
-            { name: 'test1', title: 'Test 1' },
-            { name: 'test2', title: 'Test 2' },
-            { name: 'test3', title: 'Test 3' },
-            { name: 'test4', title: 'Test 4' }
+            {name: 'test1', title: 'Test 1'},
+            {name: 'test2', title: 'Test 2'},
+            {name: 'test3', title: 'Test 3'},
+            {name: 'test4', title: 'Test 4'}
         ];
         const state = buildState({
             fields: fields
@@ -95,12 +95,12 @@ describe('FieldsReducer', () => {
         }));
     });
 
-    it("should handle move action / same place", () => {
+    it('should handle move action / same place', () => {
         const fields: Field[] = [
-            { name: 'test1', title: 'Test 1' },
-            { name: 'test2', title: 'Test 2' },
-            { name: 'test3', title: 'Test 3' },
-            { name: 'test4', title: 'Test 4' }
+            {name: 'test1', title: 'Test 1'},
+            {name: 'test2', title: 'Test 2'},
+            {name: 'test3', title: 'Test 3'},
+            {name: 'test4', title: 'Test 4'}
         ];
         const state = buildState({
             fields: fields

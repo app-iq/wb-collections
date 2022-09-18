@@ -1,5 +1,5 @@
 import {FetchActions} from '../../Data/Fetch/FetchAction';
-import {DispatchFunction} from 'wbox-context/dist/Context/DispatchContext';
+import {DispatchFunction} from 'wb-core-provider';
 import {FetchService} from './FetchService';
 import {PaginationActions} from '../../Data/Pagination/PaginationActions';
 

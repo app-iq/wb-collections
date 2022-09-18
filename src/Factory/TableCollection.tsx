@@ -1,10 +1,10 @@
 import React from 'react';
-import { useState } from 'wbox-context';
-import { withCollection } from '../Collection/WithCollection';
-import { State } from '../Data/State';
-import { RenderOptions } from '../Data/Types/Elements';
-import { getFieldValue } from '../Field/Field';
-import { withCollectionData, WithCollectionDataProps } from '../HOCs/WithCollectionData';
+import {useState} from 'wb-core-provider';
+import {withCollection} from '../Collection/WithCollection';
+import {State} from '../Data/State';
+import {RenderOptions} from '../Data/Types/Elements';
+import {getFieldValue} from '../Field/Field';
+import {withCollectionData, WithCollectionDataProps} from '../HOCs/WithCollectionData';
 
 type Props = WithCollectionDataProps & RenderOptions;
 
@@ -30,7 +30,7 @@ function _Table(props: Props) {
                     {data.map((item, index) => {
                         const cells = fields.map(field => (
                             <React.Fragment key={field.name}>
-                                <td>{getFieldValue(field, item)}</td>
+                                <td>{getFieldValue(field, item as Record<string, unknown>) as string}</td>
                             </React.Fragment>
                         ));
                         return <tr key={index}>{cells}</tr>;
@@ -39,6 +39,6 @@ function _Table(props: Props) {
             </table>
         </>
     );
-};
+}
 
 export const Table = withCollectionData(withCollection(_Table));

@@ -1,5 +1,5 @@
-import React from "react";
-import { useCollectionData } from "../Hooks/UseCollectionData";
+import React from 'react';
+import {useCollectionData} from '../Hooks/UseCollectionData';
 
 export interface WithCollectionDataProps {
     items: unknown[];
@@ -7,10 +7,9 @@ export interface WithCollectionDataProps {
     totalCount: number;
 }
 
-export function withCollectionData(Component : React.ComponentType<any>) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return function WithCollectionData(props:any) {
-        const [items , totalCount , page] = useCollectionData();
-        return <Component {...props} items={items} page={page} totalCount={totalCount} />;
-    }
+export function withCollectionData<TProps = Record<string, unknown>>(Component: React.ComponentType<TProps & WithCollectionDataProps>) {
+    return function WithCollectionDataWrapper(props: TProps) {
+        const [items, totalCount, page] = useCollectionData();
+        return <Component {...props} items={items} page={page} totalCount={totalCount}/>;
+    };
 }

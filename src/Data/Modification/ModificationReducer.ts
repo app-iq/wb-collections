@@ -1,11 +1,11 @@
 import {
+    InsertActionPayload,
     ModificationAction,
     ModificationActionType,
-    InsertActionPayload,
     UpdateActionPayload,
 } from './ModificationAction';
-import { Reducer } from 'wbox-context';
-import { State } from '../State';
+import {Reducer} from 'wb-core-provider';
+import {State} from '../State';
 
 type Index = number | 'last' | 'first';
 
@@ -23,7 +23,7 @@ export const modificationReducer: Reducer<State, ModificationAction<unknown>> = 
 
 const insert = (state: State, payload: InsertActionPayload): State => {
     const data = [...state.allItems];
-    if (payload.index === "last") {
+    if (payload.index === 'last') {
         data.push(payload.record);
     } else {
         data.splice(getIndex(payload.index, data), 0, payload.record);

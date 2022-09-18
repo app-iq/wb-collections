@@ -1,7 +1,7 @@
-import { Field } from './../../Field/Field';
-import { FieldsAction, FieldsActionType, MoveFieldPayload } from './FieldsActions';
-import { State } from './../State';
-import { Reducer } from 'wbox-context';
+import {Field} from './../../Field/Field';
+import {FieldsAction, FieldsActionType, MoveFieldPayload} from './FieldsActions';
+import {State} from './../State';
+import {Reducer} from 'wb-core-provider';
 
 export const fieldsReducer: Reducer<State, FieldsAction<unknown>> = (state, action) => {
     switch (action.type) {

@@ -1,11 +1,11 @@
-import { Field, transformFieldValue } from './../../Field/Field';
+import {Field, transformFieldValue} from '../../Field/Field';
 
 describe('Field', () => {
     it('should transform value using one function', () => {
         const field: Field = {
             name: 'test',
             title: 'Test',
-            transform: (v: any) => `${v}_xyz`,
+            transform: (v: unknown) => `${v}_xyz`,
         };
         const value = transformFieldValue('test', field, {});
         expect(value).toEqual('test_xyz');
@@ -15,7 +15,7 @@ describe('Field', () => {
         const field: Field = {
             name: 'test',
             title: 'Test',
-            transform: [(v: any) => `${v}_x`, (v: any) => `${v}y`],
+            transform: [(v: unknown) => `${v}_x`, (v: unknown) => `${v}y`],
         };
         const value = transformFieldValue('test', field, {});
         expect(value).toEqual('test_xy');
