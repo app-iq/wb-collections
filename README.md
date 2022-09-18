@@ -1,1 +1,1 @@
-# wBox-AutoCollection
+# wb-collections
