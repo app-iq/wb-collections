@@ -1,7 +1,3 @@
-Plugins:
-- tailwindcss with factories & theme
-
-
 Next Version:
 - filtering & ordering [LATER]
 - select items (rows)

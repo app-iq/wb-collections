@@ -10,8 +10,8 @@ export interface WithCollectionProps {
 }
 
 
-export function withCollection<T extends RenderOptions>(Component: React.ComponentType<T & WithCollectionProps>) {
-    return function WithCollection(props: T) {
+export function withCollection<TProps extends RenderOptions>(Component: React.ComponentType<TProps & WithCollectionProps>) {
+    return function WithCollection(props: Exclude<TProps, keyof WithCollectionProps>) {
         const state: State = useState();
         const defaults = useCollectionDefaults();
         const isEmpty = state.allItems.length === 0 && !state.loading && !state.error;
