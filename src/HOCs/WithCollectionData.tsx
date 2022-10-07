@@ -8,8 +8,8 @@ export interface WithCollectionDataProps {
 }
 
 export function withCollectionData<TProps = Record<string, unknown>>(Component: React.ComponentType<TProps & WithCollectionDataProps>) {
-    return function WithCollectionDataWrapper(props: TProps) {
+    return function WithCollectionDataWrapper(props: Omit<TProps, keyof WithCollectionDataProps>) {
         const [items, totalCount, page] = useCollectionData();
-        return <Component {...props} items={items} page={page} totalCount={totalCount}/>;
+        return <Component {...(props as TProps)} items={items} page={page} totalCount={totalCount}/>;
     };
 }
