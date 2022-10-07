@@ -11,13 +11,13 @@ export interface WithCollectionProps {
 
 
 export function withCollection<TProps extends RenderOptions>(Component: React.ComponentType<TProps & WithCollectionProps>) {
-    return function WithCollection(props: Exclude<TProps, keyof WithCollectionProps>) {
+    return function WithCollection(props: Omit<TProps, keyof WithCollectionProps>) {
         const state: State = useState();
         const defaults = useCollectionDefaults();
         const isEmpty = state.allItems.length === 0 && !state.loading && !state.error;
         const displayCollectionOnEmpty =
             props.displayCollectionOnEmpty ?? defaults.renderOptions.displayCollectionOnEmpty;
-        let collection: (() => ReactElement | null) | null = () => <Component {...props} data={state.allItems} />;
+        let collection: (() => ReactElement | null) | null = () => <Component {...(props as TProps)} data={state.allItems} />;
         const skipDisplayingCollection = (state.loading && state.allItems.length === 0) || state.error || (isEmpty && !displayCollectionOnEmpty);
         if (skipDisplayingCollection) {
             collection = null;
