@@ -1,10 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import {Example} from './__examples__/Example';
 
-ReactDOM.render(
-    <React.StrictMode>
-        <Example/>
-    </React.StrictMode>,
-    document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
+root.render(<Example/>);
