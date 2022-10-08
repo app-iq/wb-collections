@@ -1,6 +1,6 @@
 import {PaginationActions} from '../../Data/Pagination/PaginationActions';
 import {paginationReducer} from '../../Data/Pagination/PaginationReducer';
-import {buildState} from '../../TestHelpers/Helpers';
+import {buildState} from '../Helpers';
 
 describe('Pagination Reducer', () => {
 

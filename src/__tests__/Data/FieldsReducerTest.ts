@@ -1,7 +1,7 @@
 import {FieldsActions} from '../../Data/Fields/FieldsActions';
 import {fieldsReducer} from '../../Data/Fields/FieldsReducer';
 import {Field} from '../../Field/Field';
-import {buildState} from '../../TestHelpers/Helpers';
+import {buildState} from '../Helpers';
 
 describe('FieldsReducer', () => {
 

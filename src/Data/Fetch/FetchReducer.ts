@@ -1,5 +1,5 @@
 import {FetchAction, FetchActionType} from './FetchAction';
-import {State} from './../State';
+import {State} from '../State';
 import {Reducer} from 'wb-core-provider';
 
 export const fetchReducer: Reducer<State, FetchAction<unknown>> = (state, action) => {

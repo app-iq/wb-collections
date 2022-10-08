@@ -26,7 +26,7 @@ export const CollectionWrapper: React.FC<PropsWithChildren<CollectionWrapperProp
     useEffect(() => {
         const service: FetchService =
             props.fetcherType === 'http' ? serviceFactory.createHttpFetchService() : serviceFactory.createBasicFetchService();
-        service.fetch();
+        service.fetch().then();
     }, [props.fetchOptions]);
 
     return <div>{props.children}</div>;

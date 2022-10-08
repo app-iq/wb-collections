@@ -1,8 +1,8 @@
-import {CollectionsDefaults} from './../Defaults/DefaultsContext';
+import {CollectionsDefaults} from '../Defaults/DefaultsContext';
 import {BasicFetchOptions, BasicFetchService} from './Fetch/BasicFetchService';
 import {HttpFetchOptions, HttpFetchService} from './Fetch/HttpFetchService';
 import {DispatchFunction} from 'wb-core-provider';
-import {State} from './../Data/State';
+import {State} from '../Data/State';
 import {FetchService} from './Fetch/FetchService';
 import {CollectionProviderProps} from '../CollectionProvider/CollectionProvider';
 

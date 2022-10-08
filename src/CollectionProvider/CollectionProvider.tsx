@@ -14,8 +14,7 @@ import {DefaultServiceFactory, ServiceFactory} from '../Service/ServiceFactory';
 import {CollectionWrapper} from './CollectionWrapper';
 
 export interface CollectionProviderProps {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    reducers?: Reducer<State, Action<any, any>>[];
+    reducers?: Reducer<State, Action<unknown, unknown>>[];
     serviceFactory?: (dispatch: DispatchFunction, state: State, props: CollectionProviderProps) => ServiceFactory;
     fetchOptions: BasicFetchOptions | HttpFetchOptions;
     renderOptions?: RenderOptions;

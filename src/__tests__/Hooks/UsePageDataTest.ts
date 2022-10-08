@@ -1,4 +1,4 @@
-import {buildState} from '../../TestHelpers/Helpers';
+import {buildState} from '../Helpers';
 import {useState} from 'wb-core-provider';
 import {PagingData, usePagingData} from '../../Hooks/UsePagingData';
 import Mock = jest.Mock;

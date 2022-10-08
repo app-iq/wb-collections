@@ -1,7 +1,7 @@
-import React, { ReactElement } from 'react';
-import { Elements } from '../Data/Types/Elements';
-import { FetchPageOptionCallback } from '../Service/Fetch/HttpFetchService';
-import { DataResult } from './../Service/Fetch/FetchServiceBase';
+import React, {ReactElement} from 'react';
+import {Elements} from '../Data/Types/Elements';
+import {FetchPageOptionCallback} from '../Service/Fetch/HttpFetchService';
+import {DataResult} from '../Service/Fetch/FetchServiceBase';
 
 const defaultOrderElements = (elements: Elements) => {
     return [elements.loading, elements.error, elements.empty, elements.collection];

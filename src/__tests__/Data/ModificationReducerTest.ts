@@ -1,6 +1,6 @@
 import {ModificationActions} from '../../Data/Modification/ModificationAction';
 import {modificationReducer} from '../../Data/Modification/ModificationReducer';
-import {buildState} from '../../TestHelpers/Helpers';
+import {buildState} from '../Helpers';
 
 describe('Modification Reducer', () => {
 

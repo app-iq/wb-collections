@@ -7,7 +7,7 @@ export abstract class FetchServiceBase implements FetchService {
     private readonly dispatch: DispatchFunction;
     private shouldCancel = false;
 
-    constructor(dispatch: DispatchFunction) {
+    protected constructor(dispatch: DispatchFunction) {
         this.dispatch = dispatch;
     }
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import {useCollectionData} from '../../Hooks/UseCollectionData';
-import {buildState} from '../../TestHelpers/Helpers';
+import {buildState} from '../Helpers';
 import {useState} from 'wb-core-provider';
 
 jest.mock('wb-core-provider', () => {
