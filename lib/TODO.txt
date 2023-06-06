@@ -1,0 +1,7 @@
+DELETE DEFAULT PROVIDER
+delete withCollectionData
+item fetch
+
+Next Version:
+- filtering & ordering [LATER]
+- select items (rows)
