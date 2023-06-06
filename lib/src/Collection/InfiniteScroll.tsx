@@ -30,7 +30,7 @@ export const InfiniteScroll: React.FC<PropsWithChildren<Props>> = props => {
                 const canFetchNextPage = !state.loading && !state.error && state.allItems.length < state.totalCount;
                 if (canFetchNextPage) {
                     const fetchService = serviceFactory.createHttpFetchService();
-                    fetchService.fetchNextPage();
+                    fetchService.fetchMore();
                 }
             }
         };

@@ -1,7 +1,7 @@
 export interface FetchService {
     fetch(): Promise<void>;
 
-    fetchNextPage(): Promise<void>;
+    fetchMore(): Promise<void>;
 
     fetchPage(page: number): Promise<void>;
 }

@@ -12,26 +12,25 @@ export abstract class FetchServiceBase implements FetchService {
     }
 
     async fetch(): Promise<void> {
-        this.dispatch(FetchActions.setData([]));
         await this.handleFetch(() => this.fetchData());
     }
 
-    async fetchNextPage(): Promise<void> {
+    async fetchMore(): Promise<void> {
         await this.handleFetch(
-            () => this.fetchNextPageData(),
-            () => this.dispatch(PaginationActions.nextPage())
+            () => this.fetchMoreData(),
+            () => this.dispatch(PaginationActions.nextPage()),
+            true
         );
     }
 
     async fetchPage(page: number): Promise<void> {
-        this.dispatch(FetchActions.setData([]));
         await this.handleFetch(
             () => this.fetchPageData(page),
             () => this.dispatch(PaginationActions.setPage(page))
         );
     }
 
-    async handleFetch(fetchCallback: () => Promise<DataResult>, onDone?: () => void): Promise<void> {
+    async handleFetch(fetchCallback: () => Promise<DataResult>, onDone?: () => void, useAppend = false): Promise<void> {
         this.shouldCancel = false;
         this.dispatch(FetchActions.setLoading(true));
         this.dispatch(FetchActions.setError(null));
@@ -40,7 +39,11 @@ export abstract class FetchServiceBase implements FetchService {
             if (this.shouldCancel) {
                 return;
             }
-            this.dispatch(FetchActions.appendData(data.items));
+            if(useAppend) {
+                this.dispatch(FetchActions.appendData(data.items));
+            } else {
+                this.dispatch(FetchActions.setData(data.items));
+            }
             this.dispatch(FetchActions.setTotalCount(data.totalCount));
             this.dispatch(FetchActions.setLoading(false));
             this.dispatch(FetchActions.setError(null));
@@ -62,7 +65,7 @@ export abstract class FetchServiceBase implements FetchService {
 
     protected abstract fetchData(): Promise<DataResult>;
 
-    protected abstract fetchNextPageData(): Promise<DataResult>;
+    protected abstract fetchMoreData(): Promise<DataResult>;
 
     protected abstract fetchPageData(page: number): Promise<DataResult>;
 }

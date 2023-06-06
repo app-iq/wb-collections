@@ -6,7 +6,6 @@ import { BasicFetchOptions } from '../Service/Fetch/BasicFetchService';
 import { FetchService } from '../Service/Fetch/FetchService';
 import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
 import { ServiceFactory } from '../Service/ServiceFactory';
-import { FetchActions } from '../main';
 
 type FetcherType = 'http' | 'direct';
 
@@ -29,7 +28,6 @@ export const CollectionWrapper: React.FC<PropsWithChildren<CollectionWrapperProp
             props.fetcherType === 'http'
                 ? serviceFactory.createHttpFetchService()
                 : serviceFactory.createBasicFetchService();
-        dispatch(FetchActions.setData([]));
         service.fetch();
     }, [dispatch, props.fetchOptions]);
 
