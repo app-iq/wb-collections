@@ -1,6 +1,4 @@
-import {Field} from '../Field/Field';
-import {HttpFetchOptions} from '../Service/Fetch/HttpFetchService';
-import {DefaultCollectionFactory} from '../Factory/DefaultCollectionFactory';
+import {Field, HttpFetchOptions, DefaultCollectionFactory} from 'wb-collections';
 
 export function Example() {
     const url = 'http://localhost:8080/collection?page=0';
