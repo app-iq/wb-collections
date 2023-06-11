@@ -61,6 +61,12 @@ export class HttpFetchService extends FetchServiceBase {
         }
 
         return fetch(url, options)
+            .then(res => {
+                if(!res.ok) {
+                    throw new Error(res.statusText);
+                }
+                return res;
+            })
             .then(data => parseResponse(data))
             .then(res => buildData(res));
     }

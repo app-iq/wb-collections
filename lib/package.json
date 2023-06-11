@@ -1,7 +1,7 @@
 {
     "name": "wb-collections",
     "private": false,
-    "version": "0.2.6-alpha.2",
+    "version": "0.2.6-alpha.4",
     "main": "build/main.js",
     "types": "build/main.d.ts",
     "scripts": {
