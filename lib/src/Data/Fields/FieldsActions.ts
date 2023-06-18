@@ -28,8 +28,8 @@ export class FieldsActions {
         return {
             type: FieldsActionType.MOVE,
             payload: {
-                position: position,
-                fieldName: fieldName,
+                position,
+                fieldName,
             },
         };
     }

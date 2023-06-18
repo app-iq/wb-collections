@@ -1,6 +1,6 @@
-import { FetchAction, FetchActionType } from './FetchAction';
-import { State } from './../State';
 import { Reducer } from 'wb-core-provider';
+import { FetchAction, FetchActionType } from './FetchAction';
+import { State } from '../State';
 
 export const fetchReducer: Reducer<State, FetchAction<unknown>> = (state, action) => {
     switch (action.type) {
@@ -9,14 +9,16 @@ export const fetchReducer: Reducer<State, FetchAction<unknown>> = (state, action
         case FetchActionType.SET_ERROR:
             return { ...state, error: action.payload };
         case FetchActionType.SET_DATA:
-            return { ...state, allItems: action.payload as unknown[] };
+            return { ...state, items: action.payload as unknown[] };
         case FetchActionType.APPEND_DATA:
             return {
                 ...state,
-                allItems: state.allItems.concat(action.payload as unknown[]),
+                items: state.items.concat(action.payload as unknown[]),
             };
         case FetchActionType.SET_TOTAL_COUNT:
             return { ...state, totalCount: action.payload as number };
+
+        default:
+            return state;
     }
-    return state;
 };

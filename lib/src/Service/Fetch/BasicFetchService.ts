@@ -19,11 +19,11 @@ export class BasicFetchService extends FetchServiceBase {
     }
 
     protected fetchMoreData(): Promise<DataResult> {
-        throw Error('BasicFetchService doesn\'t support pagination');
+        throw Error("BasicFetchService doesn't support infinite loading");
     }
 
     protected fetchPageData(): Promise<DataResult> {
-        throw Error('BasicFetchService doesn\'t support pagination');
+        throw Error("BasicFetchService doesn't support pagination");
     }
 }
 

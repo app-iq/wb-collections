@@ -13,8 +13,8 @@ export class ModificationActions {
         return {
             type: ModificationActionType.INSERT,
             payload: {
-                record: record,
-                index: index,
+                record,
+                index,
             },
         };
     }
@@ -23,7 +23,7 @@ export class ModificationActions {
         return {
             type: ModificationActionType.INSERT,
             payload: {
-                record: record,
+                record,
                 index: 'first',
             },
         };
@@ -33,7 +33,7 @@ export class ModificationActions {
         return {
             type: ModificationActionType.INSERT,
             payload: {
-                record: record,
+                record,
                 index: 'last',
             },
         };
@@ -43,8 +43,8 @@ export class ModificationActions {
         return {
             type: ModificationActionType.UPDATE,
             payload: {
-                changePayload: changePayload,
-                index: index,
+                changePayload,
+                index,
             },
         };
     }

@@ -1,10 +1,11 @@
-import { FetchActions } from '../../Data/Fetch/FetchAction';
 import { DispatchFunction } from 'wb-core-provider';
+import { FetchActions } from '../../Data/Fetch/FetchAction';
 import { FetchService } from './FetchService';
 import { PaginationActions } from '../../Data/Pagination/PaginationActions';
 
 export abstract class FetchServiceBase implements FetchService {
     private readonly dispatch: DispatchFunction;
+
     private shouldCancel = false;
 
     constructor(dispatch: DispatchFunction) {
@@ -39,7 +40,7 @@ export abstract class FetchServiceBase implements FetchService {
             if (this.shouldCancel) {
                 return;
             }
-            if(useAppend) {
+            if (useAppend) {
                 this.dispatch(FetchActions.appendData(data.items));
             } else {
                 this.dispatch(FetchActions.setData(data.items));

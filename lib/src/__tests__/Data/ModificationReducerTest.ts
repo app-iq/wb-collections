@@ -6,13 +6,13 @@ describe('Modification Reducer', () => {
     it('should insert first', () => {
         const items = [{ value: 'test_1' }];
         const state = buildState({
-            allItems: items,
+            items,
         });
         const action = ModificationActions.insertFirst({ value: 'test_2' });
         const newState = modificationReducer(state, action);
         expect(newState).toEqual(
             buildState({
-                allItems: [{ value: 'test_2' }, ...items],
+                items: [{ value: 'test_2' }, ...items],
             })
         );
     });
@@ -20,13 +20,13 @@ describe('Modification Reducer', () => {
     it('should insert last', () => {
         const items = [{ value: 'test_1' }];
         const state = buildState({
-            allItems: items,
+            items,
         });
         const action = ModificationActions.insertLast({ value: 'test_2' });
         const newState = modificationReducer(state, action);
         expect(newState).toEqual(
             buildState({
-                allItems: [...items, { value: 'test_2' }],
+                items: [...items, { value: 'test_2' }],
             })
         );
     });
@@ -34,13 +34,13 @@ describe('Modification Reducer', () => {
     it('should insert at index', () => {
         const items = [{ value: 'test_1' }, { value: 'test_2' }];
         const state = buildState({
-            allItems: items,
+            items,
         });
         const action = ModificationActions.insertAt({ value: 'test_3' }, 1);
         const newState = modificationReducer(state, action);
         expect(newState).toEqual(
             buildState({
-                allItems: [{ value: 'test_1' }, { value: 'test_3' }, { value: 'test_2' }],
+                items: [{ value: 'test_1' }, { value: 'test_3' }, { value: 'test_2' }],
             })
         );
     });
@@ -48,13 +48,13 @@ describe('Modification Reducer', () => {
     it('should remove first', () => {
         const items = [{ value: 'test_1' }, { value: 'test_2' }];
         const state = buildState({
-            allItems: items,
+            items,
         });
         const action = ModificationActions.removeFirst();
         const newState = modificationReducer(state, action);
         expect(newState).toEqual(
             buildState({
-                allItems: [{ value: 'test_2' }],
+                items: [{ value: 'test_2' }],
             })
         );
     });
@@ -62,13 +62,13 @@ describe('Modification Reducer', () => {
     it('should remove last', () => {
         const items = [{ value: 'test_1' }, { value: 'test_2' }];
         const state = buildState({
-            allItems: items,
+            items,
         });
         const action = ModificationActions.removeLast();
         const newState = modificationReducer(state, action);
         expect(newState).toEqual(
             buildState({
-                allItems: [{ value: 'test_1' }],
+                items: [{ value: 'test_1' }],
             })
         );
     });
@@ -76,13 +76,13 @@ describe('Modification Reducer', () => {
     it('should remove at index', () => {
         const items = [{ value: 'test_1' }, { value: 'test_2' }, { value: 'test_3' }];
         const state = buildState({
-            allItems: items,
+            items,
         });
         const action = ModificationActions.remove(1);
         const newState = modificationReducer(state, action);
         expect(newState).toEqual(
             buildState({
-                allItems: [{ value: 'test_1' }, { value: 'test_3' }],
+                items: [{ value: 'test_1' }, { value: 'test_3' }],
             })
         );
     });
@@ -90,13 +90,13 @@ describe('Modification Reducer', () => {
     it('should update at index', () => {
         const items = [{ value: 'test_1' }, { value: 'test_2' }, { value: 'test_3' }];
         const state = buildState({
-            allItems: items,
+            items,
         });
         const action = ModificationActions.update({ value: 'updated', test: true }, 1);
         const newState = modificationReducer(state, action);
         expect(newState).toEqual(
             buildState({
-                allItems: [{ value: 'test_1' }, { value: 'updated', test: true }, { value: 'test_3' }],
+                items: [{ value: 'test_1' }, { value: 'updated', test: true }, { value: 'test_3' }],
             })
         );
     });

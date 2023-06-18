@@ -1,17 +1,15 @@
-import { State } from '../../Data/State';
-import { CollectionsDefaults } from '../../Defaults/DefaultsContext';
 import { DispatchFunction } from 'wb-core-provider';
+import { State } from '../../Data/State';
 import { DataResult, FetchServiceBase } from './FetchServiceBase';
 
 export class HttpFetchService extends FetchServiceBase {
     private readonly options: HttpFetchOptions;
-    private readonly defaults: CollectionsDefaults;
+
     private readonly state: State;
 
-    constructor(dispatch: DispatchFunction, state: State, options: HttpFetchOptions, defaults: CollectionsDefaults) {
+    constructor(dispatch: DispatchFunction, state: State, options: HttpFetchOptions) {
         super(dispatch);
         this.options = options;
-        this.defaults = defaults;
         this.state = state;
     }
 
@@ -28,31 +26,31 @@ export class HttpFetchService extends FetchServiceBase {
     }
 
     protected fetchPageData(page: number): Promise<DataResult> {
-        return this.sendRequest({ page: page });
+        return this.sendRequest({ page });
     }
 
     private async sendRequest(pageOptions: { isNextPage?: boolean; page?: number } = {}) {
         let url = this.getValueFromFunctionOrPermitiveType(this.options.url);
-        const parseResponse = this.options.parseResponse ?? this.defaults.httpFetcher.parseResponse;
-        const buildData = this.options.buildDataResult ?? this.defaults.httpFetcher.buildDataResult;
-        const headers = this.options.headers ?? this.defaults.httpFetcher.headers;
+        const parseResponse = this.options.parseResponse ?? defaultParseResponse;
+        const buildData = this.options.buildDataResult ?? defaultBuildDataResult;
+        const headers = this.options.headers ?? {
+            'Content-Type': 'application/json',
+        };
         let options: RequestInit = {
-            method: this.options.method ?? this.defaults.httpFetcher.method,
+            method: this.options.method ?? 'GET',
             body: this.getValueFromFunctionOrPermitiveType(this.options.body),
             headers: this.getValueFromFunctionOrPermitiveType(headers),
-            ...this.defaults.httpFetcher.requestOptions,
             ...(this.options.fetchOptions ?? {}),
         };
 
         if (pageOptions.isNextPage || pageOptions.page) {
             const page = pageOptions.isNextPage ? this.state.page + 1 : Number(pageOptions.page);
-            const fetchPageOptions: FetchPageOptionCallback =
-                this.options.fetchPageOptions ?? this.defaults.httpFetcher.fetchPageOptions;
+            const fetchPageOptions: FetchPageOptionCallback = this.options.fetchPageOptions ?? defaultFetchPageOptions;
             const { url: npUrl, options: npOptions } = fetchPageOptions(
                 url,
                 options,
                 this.state.totalCount,
-                this.state.allItems,
+                this.state.items,
                 page,
                 this.state.pageSize
             );
@@ -62,7 +60,7 @@ export class HttpFetchService extends FetchServiceBase {
 
         return fetch(url, options)
             .then(res => {
-                if(!res.ok) {
+                if (!res.ok) {
                     throw new Error(res.statusText);
                 }
                 return res;
@@ -74,7 +72,7 @@ export class HttpFetchService extends FetchServiceBase {
     private getValueFromFunctionOrPermitiveType<T>(value: FunctionOrPermitiveType<T>): T {
         if (typeof value === 'function') {
             const func = value as (totalCount: number, data: unknown[]) => T;
-            return func(this.state.totalCount, this.state.allItems);
+            return func(this.state.totalCount, this.state.items);
         }
         return value;
     }
@@ -100,5 +98,20 @@ export interface HttpFetchOptions {
     buildDataResult?: (parsedResponse: unknown) => DataResult;
     fetchPageOptions?: FetchPageOptionCallback;
     fetch?: () => Promise<DataResult>;
-    data?: never;
 }
+
+const defaultParseResponse = (response: Response) => response.json();
+
+const defaultBuildDataResult = (parsedResponse: unknown) => {
+    const res = parsedResponse as unknown[];
+    return { totalCount: res.length, items: res };
+};
+
+const defaultFetchPageOptions: FetchPageOptionCallback = (url, options, _totalCount, _items, page) => {
+    const urlObj = new URL(url);
+    urlObj.searchParams.set('page', String(page));
+    return {
+        url: urlObj.toString(),
+        options,
+    };
+};

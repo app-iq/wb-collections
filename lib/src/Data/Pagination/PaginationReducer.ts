@@ -14,8 +14,7 @@ export const paginationReducer: Reducer<State, PaginationAction<unknown>> = (sta
             return { ...state, page: Math.max(action.payload as number, 0) };
         case PaginationActionType.SET_PAGE_SIZE:
             return { ...state, pageSize: action.payload as number | undefined };
-        case PaginationActionType.SET_START_FROM:
-            return { ...state, start: action.payload as number };
+        default:
+            return state;
     }
-    return state;
 };

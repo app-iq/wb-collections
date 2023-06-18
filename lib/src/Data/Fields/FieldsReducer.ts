@@ -1,22 +1,10 @@
-import { Field } from './../../Field/Field';
-import { FieldsAction, FieldsActionType, MoveFieldPayload } from './FieldsActions';
-import { State } from './../State';
 import { Reducer } from 'wb-core-provider';
-
-export const fieldsReducer: Reducer<State, FieldsAction<unknown>> = (state, action) => {
-    switch (action.type) {
-        case FieldsActionType.SET:
-            return setFields(state, action.payload as Field[]);
-        case FieldsActionType.TOGGLE_VISIBILITY:
-            return toggleVisibility(state, action.payload as string);
-        case FieldsActionType.MOVE:
-            return move(state, action.payload as MoveFieldPayload);
-    }
-    return state;
-};
+import { Field } from '../../Field/Field';
+import { FieldsAction, FieldsActionType, MoveFieldPayload } from './FieldsActions';
+import { State } from '../State';
 
 function setFields(state: State, fields: Field[]) {
-    return { ...state, fields: fields, visibleFields: fields.map(f => f.name) };
+    return { ...state, fields, visibleFields: fields.map(f => f.name) };
 }
 
 function toggleVisibility(state: State, fieldName: string): State {
@@ -27,7 +15,7 @@ function toggleVisibility(state: State, fieldName: string): State {
     } else {
         visibleFields.push(fieldName);
     }
-    return { ...state, visibleFields: visibleFields };
+    return { ...state, visibleFields };
 }
 
 function move(state: State, payload: MoveFieldPayload): State {
@@ -38,5 +26,18 @@ function move(state: State, payload: MoveFieldPayload): State {
     fields.splice(insertIndex, 0, field);
     const removeIndex = payload.position < currentIndex ? currentIndex + 1 : currentIndex;
     fields.splice(removeIndex, 1);
-    return { ...state, fields: fields };
+    return { ...state, fields };
 }
+
+export const fieldsReducer: Reducer<State, FieldsAction<unknown>> = (state, action) => {
+    switch (action.type) {
+        case FieldsActionType.SET:
+            return setFields(state, action.payload as Field[]);
+        case FieldsActionType.TOGGLE_VISIBILITY:
+            return toggleVisibility(state, action.payload as string);
+        case FieldsActionType.MOVE:
+            return move(state, action.payload as MoveFieldPayload);
+        default:
+            return state;
+    }
+};

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import { useState } from 'wb-core-provider';
 import { useCollectionData } from '../../Hooks/UseCollectionData';
 import { buildState } from '../Utils/Helpers';
-import { useState } from 'wb-core-provider';
 
 jest.mock('wb-core-provider', () => {
     return {
@@ -17,7 +17,7 @@ function buildItems(size: number) {
 
 describe('useCollectionData', () => {
     it('it should return data when page size is defined and initial page', () => {
-        const state = buildState({ page: 0, pageSize: 3, allItems: buildItems(9), totalCount: 9 });
+        const state = buildState({ page: 0, pageSize: 3, items: buildItems(9), totalCount: 9 });
 
         // @ts-ignore
         useState.mockReturnValue(state);
@@ -29,7 +29,7 @@ describe('useCollectionData', () => {
     });
 
     it('it should return data when page size is defined and second page', () => {
-        const state = buildState({ page: 1, pageSize: 3, allItems: buildItems(9), totalCount: 9 });
+        const state = buildState({ page: 1, pageSize: 3, items: buildItems(9), totalCount: 9 });
 
         // @ts-ignore
         useState.mockReturnValue(state);
@@ -41,7 +41,7 @@ describe('useCollectionData', () => {
     });
 
     it('it should return all items when page size is not defined', () => {
-        const state = buildState({ page: 0, pageSize: undefined, allItems: buildItems(4), totalCount: 9 });
+        const state = buildState({ page: 0, pageSize: undefined, items: buildItems(4), totalCount: 9 });
 
         // @ts-ignore
         useState.mockReturnValue(state);
@@ -53,7 +53,7 @@ describe('useCollectionData', () => {
     });
 
     it('it should return all items when page size is not defined regardless what page is set', () => {
-        const state = buildState({ page: 1, pageSize: undefined, allItems: buildItems(4), totalCount: 9 });
+        const state = buildState({ page: 1, pageSize: undefined, items: buildItems(4), totalCount: 9 });
 
         // @ts-ignore
         useState.mockReturnValue(state);

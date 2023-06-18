@@ -5,7 +5,6 @@ export enum PaginationActionType {
     NEXT_PAGE = 'FETCH_ACTION@NEXT_PAGE',
     PREVIOUS_PAGE = 'FETCH_ACTION@PREV_PAGE',
     SET_PAGE = 'FETCH_ACTION@SET_PAGE',
-    SET_START_FROM = 'FETCH_ACTION@SET_START_FROM',
     SET_PAGE_SIZE = 'FETCH_ACTION@SET_PAGE_SIZE',
 }
 
@@ -37,13 +36,6 @@ export class PaginationActions {
         return {
             type: PaginationActionType.RESET_PAGE,
             payload: undefined,
-        };
-    }
-
-    public static setStart(start: number): PaginationAction<number> {
-        return {
-            type: PaginationActionType.SET_START_FROM,
-            payload: start,
         };
     }
 

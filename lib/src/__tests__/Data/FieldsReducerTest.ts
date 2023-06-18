@@ -14,7 +14,7 @@ describe('FieldsReducer', () => {
         const newState = fieldsReducer(state, action);
         expect(newState).toEqual(
             buildState({
-                fields: fields,
+                fields,
                 visibleFields: ['test1', 'test2'],
             })
         );
@@ -26,14 +26,14 @@ describe('FieldsReducer', () => {
             { name: 'test2', title: 'Test 2' },
         ];
         const state = buildState({
-            fields: fields,
+            fields,
             visibleFields: ['test1', 'test2'],
         });
         const action = FieldsActions.toggleVisibility('test2');
         const newState = fieldsReducer(state, action);
         expect(newState).toEqual(
             buildState({
-                fields: fields,
+                fields,
                 visibleFields: ['test1'],
             })
         );
@@ -45,14 +45,14 @@ describe('FieldsReducer', () => {
             { name: 'test2', title: 'Test 2' },
         ];
         const state = buildState({
-            fields: fields,
+            fields,
             visibleFields: ['test2'],
         });
         const action = FieldsActions.toggleVisibility('test1');
         const newState = fieldsReducer(state, action);
         expect(newState).toEqual(
             buildState({
-                fields: fields,
+                fields,
                 visibleFields: ['test2', 'test1'],
             })
         );
@@ -66,7 +66,7 @@ describe('FieldsReducer', () => {
             { name: 'test4', title: 'Test 4' },
         ];
         const state = buildState({
-            fields: fields,
+            fields,
         });
         const action = FieldsActions.move('test3', 0);
         const newState = fieldsReducer(state, action);
@@ -93,7 +93,7 @@ describe('FieldsReducer', () => {
             { name: 'test4', title: 'Test 4' },
         ];
         const state = buildState({
-            fields: fields,
+            fields,
         });
         const action = FieldsActions.move('test1', 2);
         const newState = fieldsReducer(state, action);
@@ -120,7 +120,7 @@ describe('FieldsReducer', () => {
             { name: 'test4', title: 'Test 4' },
         ];
         const state = buildState({
-            fields: fields,
+            fields,
         });
         const action = FieldsActions.move('test2', 1);
         const newState = fieldsReducer(state, action);

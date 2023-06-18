@@ -8,7 +8,6 @@ export interface PagingData {
     pageCount: number;
     nextPage?: number;
     previousPage?: number;
-    firstPage: number;
     lastPage: number;
 }
 
@@ -21,9 +20,8 @@ export function usePagingData(): PagingData {
         currentPage: state.page,
         pageSize: state.pageSize,
         totalCount: state.totalCount,
-        pageCount: pageCount,
-        firstPage: 0,
-        lastPage: lastPage,
+        pageCount,
+        lastPage,
         nextPage: state.page + 1 >= pageCount ? undefined : state.page + 1,
         previousPage: state.page - 1 < 0 ? undefined : state.page - 1,
     };

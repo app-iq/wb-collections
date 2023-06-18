@@ -1,5 +1,5 @@
-import { buildState } from '../Utils/Helpers';
 import { useState } from 'wb-core-provider';
+import { buildState } from '../Utils/Helpers';
 import { PagingData, usePagingData } from '../../Hooks/UsePagingData';
 import Mock = jest.Mock;
 
@@ -17,7 +17,7 @@ function buildItems(size: number) {
 
 describe('useCollectionData', () => {
     it('it should return data when page count is one', () => {
-        const state = buildState({ page: 0, pageSize: 9, allItems: buildItems(8), totalCount: 8 });
+        const state = buildState({ page: 0, pageSize: 9, items: buildItems(8), totalCount: 8 });
 
         (useState as Mock).mockReturnValue(state);
 
@@ -36,7 +36,7 @@ describe('useCollectionData', () => {
     });
 
     it('it should return data when page count is two', () => {
-        const state = buildState({ page: 0, pageSize: 9, allItems: buildItems(17), totalCount: 17 });
+        const state = buildState({ page: 0, pageSize: 9, items: buildItems(17), totalCount: 17 });
 
         (useState as Mock).mockReturnValue(state);
 
@@ -55,7 +55,7 @@ describe('useCollectionData', () => {
     });
 
     it('it should return data when page count is five', () => {
-        const state = buildState({ page: 2, pageSize: 3, allItems: buildItems(15), totalCount: 15 });
+        const state = buildState({ page: 2, pageSize: 3, items: buildItems(15), totalCount: 15 });
 
         (useState as Mock).mockReturnValue(state);
 
@@ -74,7 +74,7 @@ describe('useCollectionData', () => {
     });
 
     it('it should return data when current page is the last page', () => {
-        const state = buildState({ page: 4, pageSize: 3, allItems: buildItems(15), totalCount: 15 });
+        const state = buildState({ page: 4, pageSize: 3, items: buildItems(15), totalCount: 15 });
 
         (useState as Mock).mockReturnValue(state);
 
@@ -93,7 +93,7 @@ describe('useCollectionData', () => {
     });
 
     it('it should return data when current page is the first page', () => {
-        const state = buildState({ page: 0, pageSize: 3, allItems: buildItems(15), totalCount: 15 });
+        const state = buildState({ page: 0, pageSize: 3, items: buildItems(15), totalCount: 15 });
 
         (useState as Mock).mockReturnValue(state);
 
@@ -112,7 +112,7 @@ describe('useCollectionData', () => {
     });
 
     it('it should return data when page size is not set', () => {
-        const state = buildState({ page: 0, pageSize: undefined, allItems: buildItems(15), totalCount: 15 });
+        const state = buildState({ page: 0, pageSize: undefined, items: buildItems(15), totalCount: 15 });
 
         (useState as Mock).mockReturnValue(state);
 
