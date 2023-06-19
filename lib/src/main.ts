@@ -10,7 +10,6 @@ import {
     ModificationActions,
     ModificationActionType,
 } from './Data/Modification/ModificationAction';
-import { FieldsAction, FieldsActions, FieldsActionType } from './Data/Fields/FieldsActions';
 import { FetchAction, FetchActions, FetchActionType } from './Data/Fetch/FetchAction';
 import { CollectionProvider, CollectionProviderProps } from './CollectionProvider/CollectionProvider';
 import { InfiniteScroll } from './CollectionProvider/InfiniteScroll';
@@ -22,8 +21,6 @@ export type {
     CollectionProviderProps,
     FetchAction,
     FetchActionType,
-    FieldsAction,
-    FieldsActionType,
     ModificationAction,
     ModificationActionType,
     PaginationAction,
@@ -41,7 +38,6 @@ export {
     InfiniteScroll,
     CollectionProvider,
     FetchActions,
-    FieldsActions,
     ModificationActions,
     PaginationActions,
     useCollectionData,
