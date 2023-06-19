@@ -1,15 +1,15 @@
 import React, { PropsWithChildren, useCallback, useMemo } from 'react';
 import { Action, CoreProvider, DispatchFunction, Reducer } from 'wb-core-provider';
 import { fetchReducer } from '../Data/Fetch/FetchReducer';
-import { fieldsReducer } from '../Data/Fields/FieldsReducer';
 import { modificationReducer } from '../Data/Modification/ModificationReducer';
 import { paginationReducer } from '../Data/Pagination/PaginationReducer';
-import { buildInitialState, State } from '../Data/State';
+import { initialState, State } from '../Data/State';
 import { Field } from '../Field/Field';
 import { BasicFetchOptions } from '../Service/Fetch/BasicFetchService';
 import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';
 import { DefaultServiceFactory, ServiceFactory } from '../Service/ServiceFactory';
 import { CollectionWrapper } from './CollectionWrapper';
+import { CollectionConfigurationProvider } from './CollectionConfigurationContext';
 
 export interface CollectionProviderProps {
     reducers?: Reducer<State, Action<unknown, unknown>>[];
@@ -19,11 +19,10 @@ export interface CollectionProviderProps {
     pageSize?: number;
 }
 
-const baseReducers = [fetchReducer, fieldsReducer, paginationReducer, modificationReducer];
+const baseReducers = [fetchReducer, paginationReducer, modificationReducer];
 
 export function CollectionProvider(props: PropsWithChildren<CollectionProviderProps>) {
     const { children, reducers, serviceFactory, fetchOptions, pageSize, fields } = props;
-    const fetcherType = (fetchOptions as BasicFetchOptions).data !== undefined ? 'direct' : 'http';
     const allReducers = useMemo(() => baseReducers.concat(reducers ?? []), [reducers]);
     const createServiceFactory = useCallback(
         (dispatch: DispatchFunction, state: unknown) =>
@@ -32,15 +31,17 @@ export function CollectionProvider(props: PropsWithChildren<CollectionProviderPr
                 : new DefaultServiceFactory(state as State, dispatch, props),
         [props, serviceFactory]
     );
-    const initialState = useMemo(
-        () => buildInitialState({ pageSize, fields, visibleFields: fields.map(f => f.name) }),
-        [fields, pageSize]
-    );
+
     return (
         <CoreProvider reducers={allReducers} createServiceFactory={createServiceFactory} initialState={initialState}>
-            <CollectionWrapper fetcherType={fetcherType} fetchOptions={fetchOptions}>
-                {children}
-            </CollectionWrapper>
+            <CollectionConfigurationProvider
+                value={{
+                    pageSize,
+                    fields,
+                }}
+            >
+                <CollectionWrapper fetchOptions={fetchOptions}>{children}</CollectionWrapper>
+            </CollectionConfigurationProvider>
         </CoreProvider>
     );
 }

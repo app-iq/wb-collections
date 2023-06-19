@@ -1,8 +1,8 @@
-import { INITIAL_STATE, State } from '../../Data/State';
+import { initialState, State } from '../../Data/State';
 
 export function buildState(state: Partial<State>): State {
     return {
-        ...INITIAL_STATE,
+        ...initialState,
         ...state,
     };
 }

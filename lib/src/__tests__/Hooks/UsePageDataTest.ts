@@ -29,7 +29,6 @@ describe('useCollectionData', () => {
             nextPage: undefined,
             totalCount: 8,
             lastPage: 0,
-            firstPage: 0,
             currentPage: 0,
         };
         expect(data).toEqual(expected);
@@ -48,7 +47,6 @@ describe('useCollectionData', () => {
             nextPage: 1,
             totalCount: 17,
             lastPage: 1,
-            firstPage: 0,
             currentPage: 0,
         };
         expect(data).toEqual(expected);
@@ -67,7 +65,6 @@ describe('useCollectionData', () => {
             nextPage: 3,
             totalCount: 15,
             lastPage: 4,
-            firstPage: 0,
             currentPage: 2,
         };
         expect(data).toEqual(expected);
@@ -86,7 +83,6 @@ describe('useCollectionData', () => {
             nextPage: undefined,
             totalCount: 15,
             lastPage: 4,
-            firstPage: 0,
             currentPage: 4,
         };
         expect(data).toEqual(expected);
@@ -105,7 +101,6 @@ describe('useCollectionData', () => {
             nextPage: 1,
             totalCount: 15,
             lastPage: 4,
-            firstPage: 0,
             currentPage: 0,
         };
         expect(data).toEqual(expected);
@@ -124,7 +119,6 @@ describe('useCollectionData', () => {
             nextPage: undefined,
             totalCount: 15,
             lastPage: 0,
-            firstPage: 0,
             currentPage: 0,
         };
         expect(data).toEqual(expected);
