@@ -1,9 +1,9 @@
-import { useState } from 'wb-core-provider';
+import { useState } from 'wb-provider';
 import { useRenderFlags } from '../../Hooks/UseRenderFlags';
 import { buildState } from '../Utils/Helpers';
 import Mock = jest.Mock;
 
-jest.mock('wb-core-provider', () => {
+jest.mock('wb-provider', () => {
     return {
         useState: jest.fn(),
     };

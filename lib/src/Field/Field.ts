@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { DispatchFunction } from 'wb-core-provider';
+import { DispatchFunction } from 'wb-provider';
 
 export interface RenderValueOptions {
     field: Field;

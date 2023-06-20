@@ -1,4 +1,4 @@
-import { DispatchFunction } from 'wb-core-provider';
+import { DispatchFunction } from 'wb-provider';
 import { DataResult, FetchServiceBase } from './FetchServiceBase';
 
 export class BasicFetchService extends FetchServiceBase {

@@ -4451,10 +4451,13 @@ walker@^1.0.8:
   dependencies:
     makeerror "1.0.12"
 
-wb-core-provider@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/wb-core-provider/-/wb-core-provider-0.4.2.tgz#7b3121f27439ed9079e46cb52ce65891042b5bd9"
-  integrity sha512-r34OAUpFWRRq9Y2E8bWx2PDZG/VxTJpjh96jjsTu1ggswDPyMrKkvNBCa1Qnon1ouSQ3nRQHwwW4uUL7VlsUkQ==
+wb-provider@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/wb-provider/-/wb-provider-0.5.3.tgz#3daa1d1fca36d0440a5b1e35f1360d7045aaea18"
+  integrity sha512-Ej+LTHWx2QEpD2mgHjt4j14zPKcBwhhsBrbo/btGlu9+0DRv6zs7kazsARuGAI5CLPWihiZh90mn3ySo+ocy5g==
+  dependencies:
+    react "^18.2.0"
+    react-dom "^18.2.0"
 
 webidl-conversions@^7.0.0:
   version "7.0.0"

@@ -17,7 +17,7 @@
     "dependencies": {
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "wb-core-provider": "^0.4.2"
+        "wb-provider": "^0.5.3"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^5.16.5",

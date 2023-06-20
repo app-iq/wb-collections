@@ -1,4 +1,4 @@
-import { Reducer } from 'wb-core-provider';
+import { Reducer } from 'wb-provider';
 import { State } from '../State';
 import { PaginationAction, PaginationActionType } from './PaginationActions';
 

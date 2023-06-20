@@ -1,5 +1,5 @@
-import React, { PropsWithChildren, useCallback, useMemo } from 'react';
-import { Action, CoreProvider, DispatchFunction, Reducer } from 'wb-core-provider';
+import { PropsWithChildren, useCallback, useMemo } from 'react';
+import { Action, WBProvider, DispatchFunction, Reducer } from 'wb-provider';
 import { fetchReducer } from '../Data/Fetch/FetchReducer';
 import { modificationReducer } from '../Data/Modification/ModificationReducer';
 import { paginationReducer } from '../Data/Pagination/PaginationReducer';
@@ -33,7 +33,7 @@ export function CollectionProvider(props: PropsWithChildren<CollectionProviderPr
     );
 
     return (
-        <CoreProvider reducers={allReducers} createServiceFactory={createServiceFactory} initialState={initialState}>
+        <WBProvider reducers={allReducers} createServiceFactory={createServiceFactory} initialState={initialState}>
             <CollectionConfigurationProvider
                 value={{
                     pageSize,
@@ -42,6 +42,6 @@ export function CollectionProvider(props: PropsWithChildren<CollectionProviderPr
             >
                 <CollectionWrapper fetchOptions={fetchOptions}>{children}</CollectionWrapper>
             </CollectionConfigurationProvider>
-        </CoreProvider>
+        </WBProvider>
     );
 }

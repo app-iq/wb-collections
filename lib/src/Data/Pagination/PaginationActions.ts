@@ -1,4 +1,4 @@
-import { Action } from 'wb-core-provider';
+import { Action } from 'wb-provider';
 
 export enum PaginationActionType {
     RESET_PAGE = 'FETCH_ACTION@RESET_PAGE',

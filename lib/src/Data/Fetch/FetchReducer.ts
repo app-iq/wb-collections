@@ -1,4 +1,4 @@
-import { Reducer } from 'wb-core-provider';
+import { Reducer } from 'wb-provider';
 import { FetchAction, FetchActionType } from './FetchAction';
 import { State } from '../State';
 

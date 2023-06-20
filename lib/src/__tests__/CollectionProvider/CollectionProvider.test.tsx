@@ -1,6 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Action, Reducer, useDispatch, useState } from 'wb-core-provider';
+import { Action, Reducer, useDispatch, useState } from 'wb-provider';
 import { CollectionProvider } from '../../CollectionProvider/CollectionProvider';
 import { DefaultServiceFactory, ServiceFactory } from '../../Service/ServiceFactory';
 import { State } from '../../Data/State';

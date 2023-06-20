@@ -1,4 +1,4 @@
-import { Action } from 'wb-core-provider';
+import { Action } from 'wb-provider';
 
 export enum FetchActionType {
     SET_LOADING = 'FETCH_ACTION@SET_START',

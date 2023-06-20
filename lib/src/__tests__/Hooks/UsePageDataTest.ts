@@ -1,9 +1,9 @@
-import { useState } from 'wb-core-provider';
+import { useState } from 'wb-provider';
 import { buildState } from '../Utils/Helpers';
 import { PagingData, usePagingData } from '../../Hooks/UsePagingData';
 import Mock = jest.Mock;
 
-jest.mock('wb-core-provider', () => {
+jest.mock('wb-provider', () => {
     return {
         useState: jest.fn(),
     };

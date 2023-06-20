@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect } from 'react';
-import { useServiceFactory } from 'wb-core-provider';
+import { useServiceFactory } from 'wb-provider';
 import { BasicFetchOptions } from '../Service/Fetch/BasicFetchService';
 import { FetchService } from '../Service/Fetch/FetchService';
 import { HttpFetchOptions } from '../Service/Fetch/HttpFetchService';

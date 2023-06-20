@@ -1,4 +1,4 @@
-import { DispatchFunction } from 'wb-core-provider';
+import { DispatchFunction } from 'wb-provider';
 import { BasicFetchOptions, BasicFetchService } from './Fetch/BasicFetchService';
 import { HttpFetchOptions, HttpFetchService } from './Fetch/HttpFetchService';
 import { State } from '../Data/State';

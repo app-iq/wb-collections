@@ -1,10 +1,10 @@
 import { act, fireEvent, render } from '@testing-library/react';
-import { useServiceFactory } from 'wb-core-provider';
+import { useServiceFactory } from 'wb-provider';
 import { useRenderFlags } from '../../Hooks/UseRenderFlags';
 import { InfiniteScroll } from '../../CollectionProvider/InfiniteScroll';
 import Mock = jest.Mock;
 
-jest.mock('wb-core-provider', () => {
+jest.mock('wb-provider', () => {
     return {
         useServiceFactory: jest.fn(),
     };

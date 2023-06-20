@@ -1,4 +1,4 @@
-import { DispatchFunction } from 'wb-core-provider';
+import { DispatchFunction } from 'wb-provider';
 import { FetchActions } from '../../Data/Fetch/FetchAction';
 import { FetchService } from './FetchService';
 import { PaginationActions } from '../../Data/Pagination/PaginationActions';

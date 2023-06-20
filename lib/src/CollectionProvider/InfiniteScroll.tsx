@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
-import { useServiceFactory, useState } from 'wb-core-provider';
+import { useServiceFactory, useState } from 'wb-provider';
 import { State } from '../Data/State';
 import { ServiceFactory } from '../Service/ServiceFactory';
 import { useRenderFlags } from '../Hooks/UseRenderFlags';

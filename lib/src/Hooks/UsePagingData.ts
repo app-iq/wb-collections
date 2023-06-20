@@ -1,4 +1,4 @@
-import { useState } from 'wb-core-provider';
+import { useState } from 'wb-provider';
 import { State } from '../Data/State';
 
 export interface PagingData {

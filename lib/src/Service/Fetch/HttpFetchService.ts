@@ -1,4 +1,4 @@
-import { DispatchFunction } from 'wb-core-provider';
+import { DispatchFunction } from 'wb-provider';
 import { State } from '../../Data/State';
 import { DataResult, FetchServiceBase } from './FetchServiceBase';
 

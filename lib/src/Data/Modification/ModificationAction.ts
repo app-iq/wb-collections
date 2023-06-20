@@ -1,4 +1,4 @@
-import { Action } from 'wb-core-provider';
+import { Action } from 'wb-provider';
 
 export enum ModificationActionType {
     INSERT = 'ModificationAction@INSERT',
