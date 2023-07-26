@@ -1,0 +1,8 @@
+- delete defaults provider (maybe done)
+- delete withCollectionData (maybe done)
+- delete factory (maybe done)
+- filtering & ordering [LATER]
+- select items (rows)
+- docs
+- good testing coverage
+- improve examples
